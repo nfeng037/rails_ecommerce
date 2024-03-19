@@ -812,3 +812,728 @@ Processing by Admin::ProductsController#index as HTML
 Completed 200 OK in 25ms (Views: 16.7ms | ActiveRecord: 1.7ms | Allocations: 41870)
 
 
+Started GET "/admin/categories" for 127.0.0.1 at 2024-03-18 23:58:21 -0500
+Processing by Admin::CategoriesController#index as HTML
+  [1m[36mAdminUser Load (0.5ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb (Duration: 43.0ms | Allocations: 22533)
+Completed 200 OK in 55ms (Views: 44.1ms | ActiveRecord: 0.8ms | Allocations: 25057)
+
+
+Started GET "/admin/categories/new" for 127.0.0.1 at 2024-03-19 00:05:18 -0500
+Processing by Admin::CategoriesController#new as HTML
+  [1m[36mAdminUser Load (1.8ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb (Duration: 24.1ms | Allocations: 33233)
+Completed 200 OK in 41ms (Views: 25.4ms | ActiveRecord: 2.7ms | Allocations: 39217)
+
+
+Started POST "/admin/categories" for 127.0.0.1 at 2024-03-19 00:12:45 -0500
+Processing by Admin::CategoriesController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "category"=>{"name"=>"Clear Gel", "description"=>"Clear Gel is a staple for any nail enthusiast or professional. Perfect for building structure, adding a glossy top coat, or serving as an adhesive layer for nail art, clear gel provides versatility and durability for a flawless manicure finish."}, "commit"=>"Create Category"}
+  [1m[36mAdminUser Load (1.8ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 2.6ms | Allocations: 2278)
+
+
+  
+NameError (undefined local variable or method `current_user' for an instance of Admin::CategoriesController):
+  
+app/admin/categories.rb:14:in `block (2 levels) in <main>'
+Started POST "/admin/categories" for 127.0.0.1 at 2024-03-19 00:13:46 -0500
+Processing by Admin::CategoriesController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "category"=>{"name"=>"Clear Gel", "description"=>"Clear Gel is a staple for any nail enthusiast or professional. Perfect for building structure, adding a glossy top coat, or serving as an adhesive layer for nail art, clear gel provides versatility and durability for a flawless manicure finish."}, "commit"=>"Create Category"}
+  [1m[36mAdminUser Load (0.0ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Create (1.1ms)[0m  [1m[32mINSERT INTO "categories" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["name", "Clear Gel"], ["description", "Clear Gel is a staple for any nail enthusiast or professional. Perfect for building structure, adding a glossy top coat, or serving as an adhesive layer for nail art, clear gel provides versatility and durability for a flawless manicure finish."], ["created_at", "2024-03-19 05:13:46.233562"], ["updated_at", "2024-03-19 05:13:46.233562"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/admin/categories/1
+Completed 302 Found in 13ms (ActiveRecord: 2.4ms | Allocations: 15838)
+
+
+Started GET "/admin/categories/1" for 127.0.0.1 at 2024-03-19 00:13:46 -0500
+Processing by Admin::CategoriesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAdminUser Load (0.0ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb
+  [1m[36mActiveAdmin::Comment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Category"], ["resource_id", 1], ["namespace", "admin"]]
+  [1m[36mActiveAdmin::Comment Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ? LIMIT ? OFFSET ?[0m  [["resource_type", "Category"], ["resource_id", 1], ["namespace", "admin"], ["LIMIT", 1], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb (Duration: 20.9ms | Allocations: 36708)
+Completed 200 OK in 23ms (Views: 21.2ms | ActiveRecord: 0.5ms | Allocations: 40608)
+
+
+Started GET "/admin/categories" for 127.0.0.1 at 2024-03-19 00:13:52 -0500
+Processing by Admin::CategoriesController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb (Duration: 24.0ms | Allocations: 28911)
+Completed 200 OK in 30ms (Views: 26.2ms | ActiveRecord: 0.2ms | Allocations: 31139)
+
+
+Started GET "/admin/categories/new" for 127.0.0.1 at 2024-03-19 00:13:56 -0500
+Processing by Admin::CategoriesController#new as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb (Duration: 16.8ms | Allocations: 19521)
+Completed 200 OK in 20ms (Views: 17.7ms | ActiveRecord: 0.0ms | Allocations: 21477)
+
+
+Started POST "/admin/categories" for 127.0.0.1 at 2024-03-19 00:15:28 -0500
+Processing by Admin::CategoriesController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "category"=>{"name"=>"Color Gel", "description"=>"Color Gel brings your nail visions to life with an array of vibrant shades. Designed for long-lasting wear, our color gels offer rich pigmentation and smooth application, ensuring a stunning and durable pop of color that won’t chip or fade."}, "commit"=>"Create Category"}
+  [1m[36mAdminUser Load (0.2ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Create (1.3ms)[0m  [1m[32mINSERT INTO "categories" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["name", "Color Gel"], ["description", "Color Gel brings your nail visions to life with an array of vibrant shades. Designed for long-lasting wear, our color gels offer rich pigmentation and smooth application, ensuring a stunning and durable pop of color that won’t chip or fade."], ["created_at", "2024-03-19 05:15:28.981950"], ["updated_at", "2024-03-19 05:15:28.981950"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/admin/categories/2
+Completed 302 Found in 19ms (ActiveRecord: 1.9ms | Allocations: 5708)
+
+
+Started GET "/admin/categories/2" for 127.0.0.1 at 2024-03-19 00:15:28 -0500
+Processing by Admin::CategoriesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb
+  [1m[36mActiveAdmin::Comment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Category"], ["resource_id", 2], ["namespace", "admin"]]
+  [1m[36mActiveAdmin::Comment Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ? LIMIT ? OFFSET ?[0m  [["resource_type", "Category"], ["resource_id", 2], ["namespace", "admin"], ["LIMIT", 1], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb (Duration: 26.5ms | Allocations: 24362)
+Completed 200 OK in 31ms (Views: 26.7ms | ActiveRecord: 0.2ms | Allocations: 26902)
+
+
+Started GET "/admin/categories" for 127.0.0.1 at 2024-03-19 00:15:33 -0500
+Processing by Admin::CategoriesController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb (Duration: 16.5ms | Allocations: 28585)
+Completed 200 OK in 19ms (Views: 16.7ms | ActiveRecord: 0.1ms | Allocations: 30404)
+
+
+Started GET "/admin/categories/new" for 127.0.0.1 at 2024-03-19 00:15:35 -0500
+Processing by Admin::CategoriesController#new as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb (Duration: 15.2ms | Allocations: 19414)
+Completed 200 OK in 18ms (Views: 15.6ms | ActiveRecord: 0.1ms | Allocations: 21142)
+
+
+Started POST "/admin/categories" for 127.0.0.1 at 2024-03-19 00:15:49 -0500
+Processing by Admin::CategoriesController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "category"=>{"name"=>"Art", "description"=>"Art category is a creative playground for those who love to express themselves through their nails. From intricate nail stickers and decals to sparkling rhinestones and chrome powders, this collection offers everything you need to create truly unique and eye-catching nail art designs."}, "commit"=>"Create Category"}
+  [1m[36mAdminUser Load (0.5ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Create (2.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["name", "Art"], ["description", "Art category is a creative playground for those who love to express themselves through their nails. From intricate nail stickers and decals to sparkling rhinestones and chrome powders, this collection offers everything you need to create truly unique and eye-catching nail art designs."], ["created_at", "2024-03-19 05:15:49.132603"], ["updated_at", "2024-03-19 05:15:49.132603"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/admin/categories/3
+Completed 302 Found in 8ms (ActiveRecord: 3.2ms | Allocations: 5693)
+
+
+Started GET "/admin/categories/3" for 127.0.0.1 at 2024-03-19 00:15:49 -0500
+Processing by Admin::CategoriesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb
+  [1m[36mActiveAdmin::Comment Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Category"], ["resource_id", 3], ["namespace", "admin"]]
+  [1m[36mActiveAdmin::Comment Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ? LIMIT ? OFFSET ?[0m  [["resource_type", "Category"], ["resource_id", 3], ["namespace", "admin"], ["LIMIT", 1], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb (Duration: 19.3ms | Allocations: 24347)
+Completed 200 OK in 23ms (Views: 19.4ms | ActiveRecord: 0.3ms | Allocations: 26859)
+
+
+Started GET "/admin/categories" for 127.0.0.1 at 2024-03-19 00:15:51 -0500
+Processing by Admin::CategoriesController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb (Duration: 24.1ms | Allocations: 30234)
+Completed 200 OK in 28ms (Views: 24.4ms | ActiveRecord: 0.2ms | Allocations: 32063)
+
+
+Started GET "/admin/categories/new" for 127.0.0.1 at 2024-03-19 00:15:52 -0500
+Processing by Admin::CategoriesController#new as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb (Duration: 16.9ms | Allocations: 19414)
+Completed 200 OK in 21ms (Views: 17.3ms | ActiveRecord: 0.1ms | Allocations: 21157)
+
+
+Started POST "/admin/categories" for 127.0.0.1 at 2024-03-19 00:16:07 -0500
+Processing by Admin::CategoriesController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "category"=>{"name"=>"UV&LED Lamp", "description"=>"UV&LED Lamps are essential tools for curing gel nail products, ensuring a quick and even set for both base coats and topcoats. Our range includes high-efficiency lamps designed to speed up your manicure process while providing a perfect cure every time, compatible with both UV and LED gel formulations."}, "commit"=>"Create Category"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Create (1.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["name", "UV&LED Lamp"], ["description", "UV&LED Lamps are essential tools for curing gel nail products, ensuring a quick and even set for both base coats and topcoats. Our range includes high-efficiency lamps designed to speed up your manicure process while providing a perfect cure every time, compatible with both UV and LED gel formulations."], ["created_at", "2024-03-19 05:16:07.302836"], ["updated_at", "2024-03-19 05:16:07.302836"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/admin/categories/4
+Completed 302 Found in 9ms (ActiveRecord: 1.6ms | Allocations: 5676)
+
+
+Started GET "/admin/categories/4" for 127.0.0.1 at 2024-03-19 00:16:07 -0500
+Processing by Admin::CategoriesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb
+  [1m[36mActiveAdmin::Comment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Category"], ["resource_id", 4], ["namespace", "admin"]]
+  [1m[36mActiveAdmin::Comment Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ? LIMIT ? OFFSET ?[0m  [["resource_type", "Category"], ["resource_id", 4], ["namespace", "admin"], ["LIMIT", 1], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb (Duration: 16.7ms | Allocations: 24416)
+Completed 200 OK in 20ms (Views: 16.8ms | ActiveRecord: 0.3ms | Allocations: 26931)
+
+
+Started GET "/admin/categories" for 127.0.0.1 at 2024-03-19 00:16:13 -0500
+Processing by Admin::CategoriesController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb (Duration: 26.3ms | Allocations: 31959)
+Completed 200 OK in 30ms (Views: 26.5ms | ActiveRecord: 0.2ms | Allocations: 33773)
+
+
+Started GET "/admin/categories/new" for 127.0.0.1 at 2024-03-19 00:16:14 -0500
+Processing by Admin::CategoriesController#new as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb (Duration: 18.3ms | Allocations: 19415)
+Completed 200 OK in 22ms (Views: 18.8ms | ActiveRecord: 0.1ms | Allocations: 21146)
+
+
+Started POST "/admin/categories" for 127.0.0.1 at 2024-03-19 00:16:23 -0500
+Processing by Admin::CategoriesController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "category"=>{"name"=>"Solution", "description"=>"Solution category features a comprehensive range of nail care and preparation products designed to optimize the application and longevity of your nail treatments. From nail prep dehydrators and primers to gel cleansers and remover solutions, these products ensure a perfect foundation and finish for all your nail endeavors."}, "commit"=>"Create Category"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Create (1.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["name", "Solution"], ["description", "Solution category features a comprehensive range of nail care and preparation products designed to optimize the application and longevity of your nail treatments. From nail prep dehydrators and primers to gel cleansers and remover solutions, these products ensure a perfect foundation and finish for all your nail endeavors."], ["created_at", "2024-03-19 05:16:23.986621"], ["updated_at", "2024-03-19 05:16:23.986621"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/admin/categories/5
+Completed 302 Found in 8ms (ActiveRecord: 1.7ms | Allocations: 5684)
+
+
+Started GET "/admin/categories/5" for 127.0.0.1 at 2024-03-19 00:16:23 -0500
+Processing by Admin::CategoriesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb
+  [1m[36mActiveAdmin::Comment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Category"], ["resource_id", 5], ["namespace", "admin"]]
+  [1m[36mActiveAdmin::Comment Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ? LIMIT ? OFFSET ?[0m  [["resource_type", "Category"], ["resource_id", 5], ["namespace", "admin"], ["LIMIT", 1], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb (Duration: 18.0ms | Allocations: 24409)
+Completed 200 OK in 25ms (Views: 18.2ms | ActiveRecord: 0.3ms | Allocations: 26913)
+
+
+Started GET "/admin/categories" for 127.0.0.1 at 2024-03-19 00:16:26 -0500
+Processing by Admin::CategoriesController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb (Duration: 26.2ms | Allocations: 33623)
+Completed 200 OK in 31ms (Views: 26.5ms | ActiveRecord: 0.2ms | Allocations: 35450)
+
+
+Started GET "/admin/products" for 127.0.0.1 at 2024-03-19 00:16:52 -0500
+Processing by Admin::ProductsController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY "products"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb (Duration: 13.8ms | Allocations: 30394)
+Completed 200 OK in 17ms (Views: 14.2ms | ActiveRecord: 0.6ms | Allocations: 33301)
+
+
+Started GET "/admin/products/new" for 127.0.0.1 at 2024-03-19 00:16:53 -0500
+Processing by Admin::ProductsController#new as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb (Duration: 32.7ms | Allocations: 42801)
+Completed 200 OK in 46ms (Views: 33.4ms | ActiveRecord: 0.1ms | Allocations: 51150)
+
+
+Started POST "/admin/products" for 127.0.0.1 at 2024-03-19 00:17:30 -0500
+Processing by Admin::ProductsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "product"=>{"category_id"=>"1", "name"=>"ageha Brush on Easy Off Cushion Base 13g", "description"=>"Easy and speedy off is possible with a unique new ingredient combination. With a smooth texture, it penetrates into even the slightest irregularities of the nail and adheres to it.\r\nA brush-on type that can be painted with a brush. (The contents are the same as the container type.)\r\n* Since the thickness does not come out with one coat, it is recommended to apply twice, and it can be used together with ageha base gel.", "price"=>"34.75", "stock"=>"10", "active"=>"1"}, "commit"=>"Create Product"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Load (0.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.1ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "price", "stock", "category_id", "active", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "ageha Brush on Easy Off Cushion Base 13g"], ["description", "Easy and speedy off is possible with a unique new ingredient combination. With a smooth texture, it penetrates into even the slightest irregularities of the nail and adheres to it.\r\nA brush-on type that can be painted with a brush. (The contents are the same as the container type.)\r\n* Since the thickness does not come out with one coat, it is recommended to apply twice, and it can be used together with ageha base gel."], ["price", 34.75], ["stock", 10], ["category_id", 1], ["active", 1], ["created_at", "2024-03-19 05:17:30.271741"], ["updated_at", "2024-03-19 05:17:30.271741"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/admin/products/1
+Completed 302 Found in 21ms (ActiveRecord: 1.4ms | Allocations: 18062)
+
+
+Started GET "/admin/products/1" for 127.0.0.1 at 2024-03-19 00:17:30 -0500
+Processing by Admin::ProductsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mActiveAdmin::Comment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Product"], ["resource_id", 1], ["namespace", "admin"]]
+  [1m[36mActiveAdmin::Comment Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ? LIMIT ? OFFSET ?[0m  [["resource_type", "Product"], ["resource_id", 1], ["namespace", "admin"], ["LIMIT", 1], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb (Duration: 17.3ms | Allocations: 27497)
+Completed 200 OK in 21ms (Views: 17.7ms | ActiveRecord: 0.3ms | Allocations: 30807)
+
+
+Started GET "/admin/products" for 127.0.0.1 at 2024-03-19 00:17:35 -0500
+Processing by Admin::ProductsController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY "products"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb (Duration: 32.7ms | Allocations: 37190)
+Completed 200 OK in 36ms (Views: 32.8ms | ActiveRecord: 0.3ms | Allocations: 39007)
+
+
+Started GET "/admin/products/new" for 127.0.0.1 at 2024-03-19 00:17:41 -0500
+Processing by Admin::ProductsController#new as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb (Duration: 25.0ms | Allocations: 26954)
+Completed 200 OK in 29ms (Views: 25.4ms | ActiveRecord: 0.2ms | Allocations: 28717)
+
+
+Started POST "/admin/products" for 127.0.0.1 at 2024-03-19 00:18:11 -0500
+Processing by Admin::ProductsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "product"=>{"category_id"=>"1", "name"=>"ageha Brush-on Matte Top Gel 13g", "description"=>"A matte top with a moist finish. The matte feeling lasts firmly. It is also recommended for art.\r\n\r\n", "price"=>"34.75", "stock"=>"5", "active"=>"1"}, "commit"=>"Create Product"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Load (1.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.2ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "price", "stock", "category_id", "active", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "ageha Brush-on Matte Top Gel 13g"], ["description", "A matte top with a moist finish. The matte feeling lasts firmly. It is also recommended for art.\r\n\r\n"], ["price", 34.75], ["stock", 5], ["category_id", 1], ["active", 1], ["created_at", "2024-03-19 05:18:12.014006"], ["updated_at", "2024-03-19 05:18:12.014006"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/admin/products/2
+Completed 302 Found in 10ms (ActiveRecord: 2.0ms | Allocations: 7140)
+
+
+Started GET "/admin/products/2" for 127.0.0.1 at 2024-03-19 00:18:12 -0500
+Processing by Admin::ProductsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProduct Load (0.0ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mActiveAdmin::Comment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Product"], ["resource_id", 2], ["namespace", "admin"]]
+  [1m[36mActiveAdmin::Comment Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ? LIMIT ? OFFSET ?[0m  [["resource_type", "Product"], ["resource_id", 2], ["namespace", "admin"], ["LIMIT", 1], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb (Duration: 18.7ms | Allocations: 27232)
+Completed 200 OK in 22ms (Views: 18.8ms | ActiveRecord: 0.3ms | Allocations: 29753)
+
+
+Started GET "/admin/products" for 127.0.0.1 at 2024-03-19 00:18:14 -0500
+Processing by Admin::ProductsController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY "products"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb (Duration: 33.8ms | Allocations: 40924)
+Completed 200 OK in 37ms (Views: 34.0ms | ActiveRecord: 0.3ms | Allocations: 42728)
+
+
+Started GET "/admin/products/new" for 127.0.0.1 at 2024-03-19 00:18:16 -0500
+Processing by Admin::ProductsController#new as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb (Duration: 20.3ms | Allocations: 26952)
+Completed 200 OK in 24ms (Views: 20.6ms | ActiveRecord: 0.2ms | Allocations: 28679)
+
+
+Started POST "/admin/products" for 127.0.0.1 at 2024-03-19 00:18:41 -0500
+Processing by Admin::ProductsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "product"=>{"category_id"=>"1", "name"=>"ageha Gradation Clear Gel 7.5g", "description"=>"We have prepared a functional clear gel that allows you to choose the scene you want to use, such as delicate art and everyday salon work. Anyway, it is a clear gel of ageha that I wanted to put out a lot of kinds.\r\n\r\nA smooth gel that can be used not only for gradation but also for drop art", "price"=>"34.75", "stock"=>"12", "active"=>"1"}, "commit"=>"Create Product"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Load (1.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.2ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "price", "stock", "category_id", "active", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "ageha Gradation Clear Gel 7.5g"], ["description", "We have prepared a functional clear gel that allows you to choose the scene you want to use, such as delicate art and everyday salon work. Anyway, it is a clear gel of ageha that I wanted to put out a lot of kinds.\r\n\r\nA smooth gel that can be used not only for gradation but also for drop art"], ["price", 34.75], ["stock", 12], ["category_id", 1], ["active", 1], ["created_at", "2024-03-19 05:18:41.744768"], ["updated_at", "2024-03-19 05:18:41.744768"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/admin/products/3
+Completed 302 Found in 9ms (ActiveRecord: 1.8ms | Allocations: 7149)
+
+
+Started GET "/admin/products/3" for 127.0.0.1 at 2024-03-19 00:18:41 -0500
+Processing by Admin::ProductsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProduct Load (0.0ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mActiveAdmin::Comment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Product"], ["resource_id", 3], ["namespace", "admin"]]
+  [1m[36mActiveAdmin::Comment Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ? LIMIT ? OFFSET ?[0m  [["resource_type", "Product"], ["resource_id", 3], ["namespace", "admin"], ["LIMIT", 1], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb (Duration: 20.1ms | Allocations: 27233)
+Completed 200 OK in 24ms (Views: 20.2ms | ActiveRecord: 0.3ms | Allocations: 29754)
+
+
+Started GET "/admin/products" for 127.0.0.1 at 2024-03-19 00:18:44 -0500
+Processing by Admin::ProductsController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY "products"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb (Duration: 29.3ms | Allocations: 44888)
+Completed 200 OK in 32ms (Views: 29.4ms | ActiveRecord: 0.3ms | Allocations: 46701)
+
+
+Started GET "/admin/products/new" for 127.0.0.1 at 2024-03-19 00:18:45 -0500
+Processing by Admin::ProductsController#new as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb (Duration: 19.6ms | Allocations: 26955)
+Completed 200 OK in 24ms (Views: 19.9ms | ActiveRecord: 0.1ms | Allocations: 28733)
+
+
+Started POST "/admin/products" for 127.0.0.1 at 2024-03-19 00:19:17 -0500
+Processing by Admin::ProductsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "product"=>{"category_id"=>"1", "name"=>"ageha Top Gel 23g", "description"=>"We have prepared a large capacity of functional clear gel that allows you to choose the scene to use, such as delicate art and usual salon work.\r\n\r\n", "price"=>"72.75", "stock"=>"31", "active"=>"1"}, "commit"=>"Create Product"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Load (1.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.2ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "price", "stock", "category_id", "active", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "ageha Top Gel 23g"], ["description", "We have prepared a large capacity of functional clear gel that allows you to choose the scene to use, such as delicate art and usual salon work.\r\n\r\n"], ["price", 72.75], ["stock", 31], ["category_id", 1], ["active", 1], ["created_at", "2024-03-19 05:19:17.266821"], ["updated_at", "2024-03-19 05:19:17.266821"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/admin/products/4
+Completed 302 Found in 10ms (ActiveRecord: 1.8ms | Allocations: 7160)
+
+
+Started GET "/admin/products/4" for 127.0.0.1 at 2024-03-19 00:19:17 -0500
+Processing by Admin::ProductsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProduct Load (0.0ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mActiveAdmin::Comment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Product"], ["resource_id", 4], ["namespace", "admin"]]
+  [1m[36mActiveAdmin::Comment Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ? LIMIT ? OFFSET ?[0m  [["resource_type", "Product"], ["resource_id", 4], ["namespace", "admin"], ["LIMIT", 1], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb (Duration: 19.4ms | Allocations: 27236)
+Completed 200 OK in 23ms (Views: 19.5ms | ActiveRecord: 0.3ms | Allocations: 29777)
+
+
+Started GET "/admin/products" for 127.0.0.1 at 2024-03-19 00:19:18 -0500
+Processing by Admin::ProductsController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY "products"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb (Duration: 32.8ms | Allocations: 48637)
+Completed 200 OK in 36ms (Views: 32.5ms | ActiveRecord: 0.7ms | Allocations: 50461)
+
+
+Started GET "/admin/products/new" for 127.0.0.1 at 2024-03-19 00:19:19 -0500
+Processing by Admin::ProductsController#new as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb (Duration: 20.9ms | Allocations: 26954)
+Completed 200 OK in 24ms (Views: 21.2ms | ActiveRecord: 0.2ms | Allocations: 28684)
+
+
+Started POST "/admin/products" for 127.0.0.1 at 2024-03-19 00:20:04 -0500
+Processing by Admin::ProductsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "product"=>{"category_id"=>"1", "name"=>"ageha Easy Off Cushion Base 7.5g", "description"=>"Easy and speedy off is possible with a unique new ingredient combination. With a smooth texture, it penetrates into even the slightest irregularities of the nail and adheres to it.\r\nA container type that can be painted with a brush. (The contents are the same as the bottle type.)\r\n* Since the thickness does not come out with one application, it is recommended to apply twice, and it can be used together with ageha base gel.", "price"=>"34.75", "stock"=>"41", "active"=>"1"}, "commit"=>"Create Product"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Load (1.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.1ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "price", "stock", "category_id", "active", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "ageha Easy Off Cushion Base 7.5g"], ["description", "Easy and speedy off is possible with a unique new ingredient combination. With a smooth texture, it penetrates into even the slightest irregularities of the nail and adheres to it.\r\nA container type that can be painted with a brush. (The contents are the same as the bottle type.)\r\n* Since the thickness does not come out with one application, it is recommended to apply twice, and it can be used together with ageha base gel."], ["price", 34.75], ["stock", 41], ["category_id", 1], ["active", 1], ["created_at", "2024-03-19 05:20:04.192888"], ["updated_at", "2024-03-19 05:20:04.192888"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/admin/products/5
+Completed 302 Found in 9ms (ActiveRecord: 1.7ms | Allocations: 7133)
+
+
+Started GET "/admin/products/5" for 127.0.0.1 at 2024-03-19 00:20:04 -0500
+Processing by Admin::ProductsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProduct Load (0.0ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mActiveAdmin::Comment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Product"], ["resource_id", 5], ["namespace", "admin"]]
+  [1m[36mActiveAdmin::Comment Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ? LIMIT ? OFFSET ?[0m  [["resource_type", "Product"], ["resource_id", 5], ["namespace", "admin"], ["LIMIT", 1], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb (Duration: 17.6ms | Allocations: 27233)
+Completed 200 OK in 22ms (Views: 17.7ms | ActiveRecord: 0.2ms | Allocations: 29753)
+
+
+Started GET "/admin/products" for 127.0.0.1 at 2024-03-19 00:20:06 -0500
+Processing by Admin::ProductsController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY "products"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb (Duration: 40.1ms | Allocations: 52529)
+Completed 200 OK in 43ms (Views: 40.2ms | ActiveRecord: 0.4ms | Allocations: 54338)
+
+
+Started GET "/admin/products/new" for 127.0.0.1 at 2024-03-19 00:21:37 -0500
+Processing by Admin::ProductsController#new as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb (Duration: 19.1ms | Allocations: 26954)
+Completed 200 OK in 27ms (Views: 19.5ms | ActiveRecord: 0.2ms | Allocations: 28699)
+
+
+Started POST "/admin/products" for 127.0.0.1 at 2024-03-19 00:22:35 -0500
+Processing by Admin::ProductsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "product"=>{"category_id"=>"2", "name"=>"ageha Cream Art Gel Black 2.7g", "description"=>"[Product number / color] Black\r\n\r\nA new feel like whipped cream. \"Smooth\" brush touch even though the edge works. A new type of art gel that allows you to enjoy various textures.\r\n* Cosmetics manufacturing and sales notification completed\r\n\r\n \r\n\r\n[Contents / Remarks] 2.7g\r\n\r\n \r\n\r\nSoftgel type UV about 2 minutes LED about 20 seconds M\r\n\r\nItem code: 16802", "price"=>"15.00", "stock"=>"4", "active"=>"1"}, "commit"=>"Create Product"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Load (1.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.2ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "price", "stock", "category_id", "active", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "ageha Cream Art Gel Black 2.7g"], ["description", "[Product number / color] Black\r\n\r\nA new feel like whipped cream. \"Smooth\" brush touch even though the edge works. A new type of art gel that allows you to enjoy various textures.\r\n* Cosmetics manufacturing and sales notification completed\r\n\r\n \r\n\r\n[Contents / Remarks] 2.7g\r\n\r\n \r\n\r\nSoftgel type UV about 2 minutes LED about 20 seconds M\r\n\r\nItem code: 16802"], ["price", 15.0], ["stock", 4], ["category_id", 2], ["active", 1], ["created_at", "2024-03-19 05:22:35.803340"], ["updated_at", "2024-03-19 05:22:35.803340"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/admin/products/6
+Completed 302 Found in 11ms (ActiveRecord: 2.0ms | Allocations: 7148)
+
+
+Started GET "/admin/products/6" for 127.0.0.1 at 2024-03-19 00:22:35 -0500
+Processing by Admin::ProductsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProduct Load (0.0ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mActiveAdmin::Comment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Product"], ["resource_id", 6], ["namespace", "admin"]]
+  [1m[36mActiveAdmin::Comment Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ? LIMIT ? OFFSET ?[0m  [["resource_type", "Product"], ["resource_id", 6], ["namespace", "admin"], ["LIMIT", 1], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb (Duration: 18.4ms | Allocations: 27237)
+Completed 200 OK in 23ms (Views: 18.5ms | ActiveRecord: 0.3ms | Allocations: 29751)
+
+
+Started GET "/admin/products" for 127.0.0.1 at 2024-03-19 00:22:37 -0500
+Processing by Admin::ProductsController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb
+  [1m[36mProduct Load (2.1ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY "products"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb (Duration: 43.7ms | Allocations: 56478)
+Completed 200 OK in 47ms (Views: 41.9ms | ActiveRecord: 2.3ms | Allocations: 58296)
+
+
+Started GET "/admin/products/new" for 127.0.0.1 at 2024-03-19 00:22:47 -0500
+Processing by Admin::ProductsController#new as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb (Duration: 19.4ms | Allocations: 26954)
+Completed 200 OK in 23ms (Views: 19.7ms | ActiveRecord: 0.1ms | Allocations: 28696)
+
+
+Started POST "/admin/products" for 127.0.0.1 at 2024-03-19 00:23:09 -0500
+Processing by Admin::ProductsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "product"=>{"category_id"=>"2", "name"=>"ageha Cream Art Gel L . Silver 2.7g", "description"=>"[Product number / color] L / silver\r\n\r\nCream Art Gel, which is very popular due to its mysterious texture like whipped cream, is a color gel for art that is hard to flow and can be used for various arts.\r\nThe pearl color with metallic space between high quality pearl powder used in cosmetics is polarized pearl depending on the color, and you can enjoy changing the color depending on the angle.\r\n\r\n \r\n\r\n \r\n\r\n[Contents / Remarks] 2.7g\r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\nSoftgel type UV about 2 minutes LED about 20 seconds P\r\n\r\nProduct code: 115058", "price"=>"15.00", "stock"=>"3", "active"=>"1"}, "commit"=>"Create Product"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Load (1.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.2ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "price", "stock", "category_id", "active", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "ageha Cream Art Gel L . Silver 2.7g"], ["description", "[Product number / color] L / silver\r\n\r\nCream Art Gel, which is very popular due to its mysterious texture like whipped cream, is a color gel for art that is hard to flow and can be used for various arts.\r\nThe pearl color with metallic space between high quality pearl powder used in cosmetics is polarized pearl depending on the color, and you can enjoy changing the color depending on the angle.\r\n\r\n \r\n\r\n \r\n\r\n[Contents / Remarks] 2.7g\r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\nSoftgel type UV about 2 minutes LED about 20 seconds P\r\n\r\nProduct code: 115058"], ["price", 15.0], ["stock", 3], ["category_id", 2], ["active", 1], ["created_at", "2024-03-19 05:23:09.171980"], ["updated_at", "2024-03-19 05:23:09.171980"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/admin/products/7
+Completed 302 Found in 9ms (ActiveRecord: 1.8ms | Allocations: 7146)
+
+
+Started GET "/admin/products/7" for 127.0.0.1 at 2024-03-19 00:23:09 -0500
+Processing by Admin::ProductsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProduct Load (0.0ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mActiveAdmin::Comment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Product"], ["resource_id", 7], ["namespace", "admin"]]
+  [1m[36mActiveAdmin::Comment Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ? LIMIT ? OFFSET ?[0m  [["resource_type", "Product"], ["resource_id", 7], ["namespace", "admin"], ["LIMIT", 1], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb (Duration: 20.6ms | Allocations: 27233)
+Completed 200 OK in 23ms (Views: 20.6ms | ActiveRecord: 0.3ms | Allocations: 29741)
+
+
+Started GET "/admin/products" for 127.0.0.1 at 2024-03-19 00:23:10 -0500
+Processing by Admin::ProductsController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY "products"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb (Duration: 76.0ms | Allocations: 60372)
+Completed 200 OK in 79ms (Views: 76.1ms | ActiveRecord: 0.3ms | Allocations: 62184)
+
+
+Started GET "/admin/products/new" for 127.0.0.1 at 2024-03-19 00:23:20 -0500
+Processing by Admin::ProductsController#new as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb (Duration: 18.9ms | Allocations: 26953)
+Completed 200 OK in 22ms (Views: 19.2ms | ActiveRecord: 0.2ms | Allocations: 28689)
+
+
+Started POST "/admin/products" for 127.0.0.1 at 2024-03-19 00:23:44 -0500
+Processing by Admin::ProductsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "product"=>{"category_id"=>"2", "name"=>"ageha Cream Art Gel L . Gold 2.7g", "description"=>"[Product number / color] L / gold\r\n\r\nCream Art Gel, which is very popular due to its mysterious texture like whipped cream, is a color gel for art that is hard to flow and can be used for various arts.\r\nThe pearl color with metallic space between high quality pearl powder used in cosmetics is polarized pearl depending on the color, and you can enjoy changing the color depending on the angle.\r\n\r\n \r\n\r\n \r\n\r\n[Contents / Remarks] 2.7g\r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\nSoftgel type UV about 2 minutes LED about 20 seconds P\r\n\r\nProduct code: 115062", "price"=>"15.00", "stock"=>"8", "active"=>"1"}, "commit"=>"Create Product"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Load (1.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.1ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "price", "stock", "category_id", "active", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "ageha Cream Art Gel L . Gold 2.7g"], ["description", "[Product number / color] L / gold\r\n\r\nCream Art Gel, which is very popular due to its mysterious texture like whipped cream, is a color gel for art that is hard to flow and can be used for various arts.\r\nThe pearl color with metallic space between high quality pearl powder used in cosmetics is polarized pearl depending on the color, and you can enjoy changing the color depending on the angle.\r\n\r\n \r\n\r\n \r\n\r\n[Contents / Remarks] 2.7g\r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\nSoftgel type UV about 2 minutes LED about 20 seconds P\r\n\r\nProduct code: 115062"], ["price", 15.0], ["stock", 8], ["category_id", 2], ["active", 1], ["created_at", "2024-03-19 05:23:44.879277"], ["updated_at", "2024-03-19 05:23:44.879277"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/admin/products/8
+Completed 302 Found in 8ms (ActiveRecord: 1.6ms | Allocations: 7160)
+
+
+Started GET "/admin/products/8" for 127.0.0.1 at 2024-03-19 00:23:44 -0500
+Processing by Admin::ProductsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProduct Load (0.0ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mActiveAdmin::Comment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Product"], ["resource_id", 8], ["namespace", "admin"]]
+  [1m[36mActiveAdmin::Comment Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ? LIMIT ? OFFSET ?[0m  [["resource_type", "Product"], ["resource_id", 8], ["namespace", "admin"], ["LIMIT", 1], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb (Duration: 17.6ms | Allocations: 27233)
+Completed 200 OK in 20ms (Views: 17.7ms | ActiveRecord: 0.2ms | Allocations: 29743)
+
+
+Started GET "/admin/products" for 127.0.0.1 at 2024-03-19 00:23:46 -0500
+Processing by Admin::ProductsController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY "products"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb (Duration: 42.2ms | Allocations: 64406)
+Completed 200 OK in 46ms (Views: 42.3ms | ActiveRecord: 0.4ms | Allocations: 66227)
+
+
+Started GET "/admin/products/new" for 127.0.0.1 at 2024-03-19 00:23:49 -0500
+Processing by Admin::ProductsController#new as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb (Duration: 21.4ms | Allocations: 26955)
+Completed 200 OK in 24ms (Views: 21.6ms | ActiveRecord: 0.2ms | Allocations: 28694)
+
+
+Started POST "/admin/products" for 127.0.0.1 at 2024-03-19 00:24:26 -0500
+Processing by Admin::ProductsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "product"=>{"category_id"=>"2", "name"=>"ageha Cream Art Gel Pumpkin 2.7g", "description"=>"\r\nSold out\r\nageha Cream Art Gel Pumpkin 2.7g\r\n$15.00\r\nShipping calculated at checkout.\r\nThis product is unavailable\r\n\r\nShare Share on Facebook Share on Twitter Pin it\r\n[Product number / color] Pumpkin\r\n\r\nIntroducing the Macaron Cream Collection from the popular cream art gel!\r\nA color gel for art that has a mysterious texture like whipped cream and does not flow easily, and can be used for various arts.\r\n* Because it is a gel that is highly curable and easily hardens, put it on a pallet and close the lid before use.\r\n* Cosmetics manufacturing and sales notification completed\r\n\r\n \r\n\r\n \r\n\r\n[Contents / Remarks] 2.7g\r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\nSoftgel type UV about 2 minutes LED about 20 seconds M\r\n\r\nProduct code: 113411", "price"=>"15", "stock"=>"13", "active"=>"1"}, "commit"=>"Create Product"}
+  [1m[36mAdminUser Load (0.2ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Load (0.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.1ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "price", "stock", "category_id", "active", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "ageha Cream Art Gel Pumpkin 2.7g"], ["description", "\r\nSold out\r\nageha Cream Art Gel Pumpkin 2.7g\r\n$15.00\r\nShipping calculated at checkout.\r\nThis product is unavailable\r\n\r\nShare Share on Facebook Share on Twitter Pin it\r\n[Product number / color] Pumpkin\r\n\r\nIntroducing the Macaron Cream Collection from the popular cream art gel!\r\nA color gel for art that has a mysterious texture like whipped cream and does not flow easily, and can be used for various arts.\r\n* Because it is a gel that is highly curable and easily hardens, put it on a pallet and close the lid before use.\r\n* Cosmetics manufacturing and sales notification completed\r\n\r\n \r\n\r\n \r\n\r\n[Contents / Remarks] 2.7g\r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\nSoftgel type UV about 2 minutes LED about 20 seconds M\r\n\r\nProduct code: 113411"], ["price", 15.0], ["stock", 13], ["category_id", 2], ["active", 1], ["created_at", "2024-03-19 05:24:26.969740"], ["updated_at", "2024-03-19 05:24:26.969740"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/admin/products/9
+Completed 302 Found in 9ms (ActiveRecord: 1.6ms | Allocations: 7140)
+
+
+Started GET "/admin/products/9" for 127.0.0.1 at 2024-03-19 00:24:26 -0500
+Processing by Admin::ProductsController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mActiveAdmin::Comment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Product"], ["resource_id", 9], ["namespace", "admin"]]
+  [1m[36mActiveAdmin::Comment Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ? LIMIT ? OFFSET ?[0m  [["resource_type", "Product"], ["resource_id", 9], ["namespace", "admin"], ["LIMIT", 1], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb (Duration: 18.4ms | Allocations: 27090)
+Completed 200 OK in 22ms (Views: 18.5ms | ActiveRecord: 0.3ms | Allocations: 29608)
+
+
+Started GET "/admin/products" for 127.0.0.1 at 2024-03-19 00:24:28 -0500
+Processing by Admin::ProductsController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY "products"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb (Duration: 47.0ms | Allocations: 68296)
+Completed 200 OK in 50ms (Views: 47.1ms | ActiveRecord: 0.4ms | Allocations: 70103)
+
+
+Started GET "/admin/products/new" for 127.0.0.1 at 2024-03-19 00:24:31 -0500
+Processing by Admin::ProductsController#new as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/new.html.arb (Duration: 18.3ms | Allocations: 26955)
+Completed 200 OK in 22ms (Views: 18.7ms | ActiveRecord: 0.1ms | Allocations: 28694)
+
+
+Started POST "/admin/products" for 127.0.0.1 at 2024-03-19 00:25:05 -0500
+Processing by Admin::ProductsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "product"=>{"category_id"=>"2", "name"=>"ageha Cream Art Gel Kiwi 2.7g", "description"=>"[Product number / color] Kiwi\r\n\r\nIntroducing the Macaron Cream Collection from the popular cream art gel!\r\nA color gel for art that has a mysterious texture like whipped cream and does not flow easily, and can be used for various arts.\r\n* Because it is a gel that is highly curable and easily hardens, put it on a pallet and close the lid before use.\r\n* Cosmetics manufacturing and sales notification completed\r\n\r\n \r\n\r\n \r\n\r\n[Contents / Remarks] 2.7g\r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\nSoftgel type UV about 2 minutes LED about 20 seconds M\r\n\r\nProduct code: 113410\r\n\r\n", "price"=>"15", "stock"=>"6", "active"=>"1"}, "commit"=>"Create Product"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Load (1.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.1ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "price", "stock", "category_id", "active", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "ageha Cream Art Gel Kiwi 2.7g"], ["description", "[Product number / color] Kiwi\r\n\r\nIntroducing the Macaron Cream Collection from the popular cream art gel!\r\nA color gel for art that has a mysterious texture like whipped cream and does not flow easily, and can be used for various arts.\r\n* Because it is a gel that is highly curable and easily hardens, put it on a pallet and close the lid before use.\r\n* Cosmetics manufacturing and sales notification completed\r\n\r\n \r\n\r\n \r\n\r\n[Contents / Remarks] 2.7g\r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n\r\nSoftgel type UV about 2 minutes LED about 20 seconds M\r\n\r\nProduct code: 113410\r\n\r\n"], ["price", 15.0], ["stock", 6], ["category_id", 2], ["active", 1], ["created_at", "2024-03-19 05:25:05.543285"], ["updated_at", "2024-03-19 05:25:05.543285"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://127.0.0.1:3000/admin/products/10
+Completed 302 Found in 9ms (ActiveRecord: 2.0ms | Allocations: 7140)
+
+
+Started GET "/admin/products/10" for 127.0.0.1 at 2024-03-19 00:25:05 -0500
+Processing by Admin::ProductsController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProduct Load (0.0ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mActiveAdmin::Comment Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Product"], ["resource_id", 10], ["namespace", "admin"]]
+  [1m[36mActiveAdmin::Comment Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ? LIMIT ? OFFSET ?[0m  [["resource_type", "Product"], ["resource_id", 10], ["namespace", "admin"], ["LIMIT", 1], ["OFFSET", 0]]
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/show.html.arb (Duration: 18.1ms | Allocations: 27231)
+Completed 200 OK in 21ms (Views: 18.1ms | ActiveRecord: 0.3ms | Allocations: 29749)
+
+
+Started GET "/admin/products" for 127.0.0.1 at 2024-03-19 00:25:07 -0500
+Processing by Admin::ProductsController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ? ORDER BY "admin_users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY "products"."id" desc LIMIT ? OFFSET ?[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories"[0m
+  Rendered /Users/angelina/.gem/gems/activeadmin-3.2.0/app/views/active_admin/resource/index.html.arb (Duration: 48.0ms | Allocations: 72194)
+Completed 200 OK in 51ms (Views: 48.0ms | ActiveRecord: 0.4ms | Allocations: 74010)
+
+
