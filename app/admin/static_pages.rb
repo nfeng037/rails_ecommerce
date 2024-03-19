@@ -5,7 +5,7 @@ ActiveAdmin.register StaticPage do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :title, :content, :identifier
+  permit_params :title, :content, :identifier
   #
   # or
   #
@@ -14,5 +14,5 @@ ActiveAdmin.register StaticPage do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
 end
