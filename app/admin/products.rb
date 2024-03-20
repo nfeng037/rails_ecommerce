@@ -25,10 +25,12 @@ ActiveAdmin.register Product do
   filter :active
   filter :price
   filter :stock
+  filter :category_id
 
   form do |f|
     f.inputs do
       f.input :name
+      f.input :category_id
       f.input :description
       f.input :price
       f.input :stock
@@ -45,9 +47,10 @@ ActiveAdmin.register Product do
       row :price
       row :stock
       row :active
-      row :image do |customer|
-        if customer.image.attached?
-          image_tag url_for(customer.image), width: "200px", height: "200px"
+      row :category_id
+      row :image do |product|
+        if product.image.attached?
+          image_tag url_for(product.image), width: "200px", height: "200px"
         end
       end
     end
