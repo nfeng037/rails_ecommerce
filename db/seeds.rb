@@ -1,49 +1,49 @@
-# Create AdminUser
+# # Create AdminUser
 #AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
-# Web scraping script
+# # Web scraping script
 require 'open-uri'
 
 nailformula_url = 'https://nailformula.ca'
 
-# Scrap Cleto Color Gel
-# cleto_gel_url = nailformula_url + '/collections/cleto'
-# cleto_gel_html = URI.open(cleto_gel_url).read
-# cleto_gel_doc = Nokogiri::HTML(cleto_gel_html)
+Scrap Cleto Color Gel
+cleto_gel_url = nailformula_url + '/collections/cleto'
+cleto_gel_html = URI.open(cleto_gel_url).read
+cleto_gel_doc = Nokogiri::HTML(cleto_gel_html)
 
-# cletos = cleto_gel_doc.css('div.product')
+cletos = cleto_gel_doc.css('div.product')
 
-# # Loop over all the products divs located by the CSS selector
-# cletos.each do |cleto|
-#   # Extract the Cleto name, price, image and the URL of the product page.
-#   cleto_name = cleto.css('a.product-block-title').text.strip
-#   cleto_href = cleto.css('a.product-block-title').attribute('href').content
-#   cleto_price = cleto.css('span.price').text.strip
-#   cleto_image_url = cleto.css('div.product-image__primary noscript img').first['src'].split('?').first
-#   cleto_image_url = "https:#{cleto_image_url}"
+# Loop over all the products divs located by the CSS selector
+cletos.each do |cleto|
+  # Extract the Cleto name, price, image and the URL of the product page.
+  cleto_name = cleto.css('a.product-block-title').text.strip
+  cleto_href = cleto.css('a.product-block-title').attribute('href').content
+  cleto_price = cleto.css('span.price').text.strip
+  cleto_image_url = cleto.css('div.product-image__primary noscript img').first['src'].split('?').first
+  cleto_image_url = "https:#{cleto_image_url}"
 
-  # # Visit each product page to extra the product description.
-  # cleto_page_html = URI.open("#{nailformula_url}#{cleto_href}").read
-  # cleto_page_doc = Nokogiri::HTML(cleto_page_html)
-  # cleto_description = cleto_page_doc.css('div.descriptionunder p span').text
+  # Visit each product page to extra the product description.
+  cleto_page_html = URI.open("#{nailformula_url}#{cleto_href}").read
+  cleto_page_doc = Nokogiri::HTML(cleto_page_html)
+  cleto_description = cleto_page_doc.css('div.descriptionunder p span').text
 
-  # product = Product.create(
-  #   name: cleto_name,
-  #   description: cleto_description,
-  #   price: cleto_price.gsub(/[^0-9\.]/, '').to_f,
-  #   stock: rand(1..20),
-  #   active: [true, false].sample,
-  #   category_id: 2
-  # )
+  product = Product.create(
+    name: cleto_name,
+    description: cleto_description,
+    price: cleto_price.gsub(/[^0-9\.]/, '').to_f,
+    stock: rand(1..20),
+    active: [true, false].sample,
+    category_id: 2
+  )
 
-  # # Download image and attach to the product
-  # begin
-  #   download_image = URI.open(cleto_image_url)
-  #   product.image.attach(io: download_image, filename: File.basename(URI.parse(cleto_image_url).path))
-  # rescue OpenURI::HTTPError => e
-  #   puts "Failed to download image for product #{product.name}: #{e.message}"
-  # end
-# end
+  # Download image and attach to the product
+  begin
+    download_image = URI.open(cleto_image_url)
+    product.image.attach(io: download_image, filename: File.basename(URI.parse(cleto_image_url).path))
+  rescue OpenURI::HTTPError => e
+    puts "Failed to download image for product #{product.name}: #{e.message}"
+  end
+end
 
 # Scrap Clear Gel Product
 # url = nailformula_url + '/collections/dinagel-clear-gel'
@@ -193,4 +193,41 @@ nailformula_url = 'https://nailformula.ca'
 #   end
 # end
 
+# Using API import Product data
+require 'faraday'
+require 'faraday_middleware'
 
+conn = Faraday.new(url: 'http://makeup-api.herokuapp.com/api/v1/products.json') do |faraday|
+  faraday.response :json
+  faraday.adapter Faraday.default_adapter
+  faraday.params['product_type'] = 'nail_polish'
+end
+
+response = conn.get()
+
+if response.success?
+  nail_polishes = response.body
+
+  nail_polishes.each do |nail_polish|
+    product = Product.create(
+      name: nail_polish["name"],
+      price: nail_polish["price"],
+      description: nail_polish["description"],
+      stock: rand(1..20),
+      active: [true, false].sample,
+      category_id: 6
+    )
+
+    polish_image_url = nail_polish["image_link"]
+
+    #Download image and attach to product
+    begin
+      download_image = URI.open(polish_image_url)
+      product.image.attach(io: download_image, filename: File.basename(URI.parse(polish_image_url).path))
+    rescue OpenURI::HTTPError => e
+      puts "Failed to download image."
+    end
+  end
+else
+  puts "error"
+end

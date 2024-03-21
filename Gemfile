@@ -76,3 +76,7 @@ gem "devise", "~> 4.9"
 gem "sassc-rails", "~> 2.1"
 
 gem "faker", "~> 3.2"
+
+gem "faraday", "1.10.3"
+
+gem "faraday_middleware", "1.2.0"
