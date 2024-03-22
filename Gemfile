@@ -80,3 +80,5 @@ gem "faker", "~> 3.2"
 gem "faraday", "1.10.3"
 
 gem "faraday_middleware", "1.2.0"
+
+gem 'kaminari','1.2.2'
