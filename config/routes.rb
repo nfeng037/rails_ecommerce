@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   get 'pages/:identifier', to: 'static_pages#show', as: :static_page
-
+  resources :products, path: 'product'
 end

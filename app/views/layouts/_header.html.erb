@@ -1,0 +1,33 @@
+<header class="bg-[#efe3d9] w-screen ">
+  <nav class="flex w-[80%] h-14 justify-between mx-auto py-5 items-center">
+    <ul class="flex gap-4 list-none items-center m-0">
+      <li>
+        <%= link_to 'HOME', static_page_path('home') %>
+      </li>
+      <li>
+        <%= link_to 'SHOP', products_path %>
+      </li>
+      <li>
+        <%= link_to 'ABOUT', static_page_path('about') %>
+      </li>
+      <li>
+        <%= link_to 'CONTACT', static_page_path('contact') %>
+      </li>
+
+    </ul>
+    <%= image_tag 'Glamour.png', alt: "LOGO", class: "w-24 h-auto" %>
+    <ul class="flex gap-4 list-none items-center m-0">
+      <li>
+        <div class="bg-[#E6CDBA] rounded px-3 py-2 ">LOGIN</div>
+      </li>
+      <li>
+        CART ( 0 )
+      </li>
+      <li>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+        </svg>
+      </li>
+    </ul>
+  </nav>
+</header>
