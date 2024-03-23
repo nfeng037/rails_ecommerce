@@ -45,7 +45,7 @@
     </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
         <% @products.each do |product| %>
-          <div class="shadow-md overflow-hidden rounded cursor-pointer hover:-translate-y-2 transition-all relative">
+          <%= link_to product_path(product), class:"shadow-md overflow-hidden rounded cursor-pointer hover:-translate-y-2 transition-all relative" do %>
             <div class="w-48 h-48 lg:w-[250px] lg:h-[250px] p-4 overflow-hidden mx-auto aspect-w-16 aspect-h-8 md:mb-2 mb-4">
               <%= image_tag product.image, alt:product.name%>
             </div>
@@ -57,9 +57,8 @@
                 Add to cart
               </button>
             </div>
-          </div>
+          <% end %>
         <% end %>
-
       </div>
       <%= paginate @products %>
   </div>

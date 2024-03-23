@@ -1,6 +1,23 @@
-<header class="bg-[#efe3d9] z-10 w-screen fixed top-0 left-0 right-0">
-  <nav class="flex md:w-[80%] h-14 justify-between mx-auto py-5 items-center text-gray-700 ">
-    <ul class="flex gap-4 list-none items-center m-0">
+<header class="bg-[#efe3d9] py-3 sm:px-10 font-[sans-serif] min-h-[70px] fixed top-0 left-0 right-0 w-full z-50">
+  <nav class="flex flex-wrap items-center justify-between gap-5 w-[85%] mx-auto ">
+    <%= link_to static_page_path('home') do %>
+      <%= image_tag 'Glamour.png', alt: "LOGO", class: "w-36 lg:absolute max-lg:top-4 max-lg:left-10 max-sm:left-4 lg:top-2/4 lg:left-2/4 lg:-translate-x-1/2 lg:-translate-y-1/2" %>
+    <% end %>
+    <div class="flex items-center ml-auto lg:order-1">
+        <button class="bg-[#E6CDBA] rounded px-3 py-2 mr-6">LOGIN</button>
+        <p class="mr-6">CART ( 0 ) </p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+        </svg>
+        <button id="toggle" class='lg:hidden ml-7'>
+          <svg class="w-7 h-7" fill="#333" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </button>
+    </div>
+    <ul id="menu" class="lg:!flex lg:space-x-5 max-lg:space-y-2 max-lg:hidden max-lg:py-4 max-lg:w-full">
       <li>
         <%= link_to 'HOME', static_page_path('home'), class: "#{current_page?(static_page_path('home')) ? 'underline decoration-2 underline-offset-4' : 'no-underline'} hover:text-gray-500" %>
       </li>
@@ -14,23 +31,22 @@
       <li>
         <%= link_to 'CONTACT', static_page_path('contact'), class: "#{current_page?(static_page_path('contact')) ? 'underline decoration-2 underline-offset-4' : 'no-underline'} hover:text-gray-500" %>
       </li>
-
-    </ul>
-    <%= link_to static_page_path('home') do %>
-      <%= image_tag 'Glamour.png', alt: "LOGO", class: "w-24 h-auto" %>
-    <% end %>
-    <ul class="flex gap-4 list-none items-center m-0">
-      <li>
-        <div class="bg-[#E6CDBA] rounded px-3 py-2 ">LOGIN</div>
-      </li>
-      <li>
-        CART ( 0 )
-      </li>
-      <li>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-        </svg>
-      </li>
     </ul>
   </nav>
 </header>
+
+
+<script>
+  var toggleBtn = document.getElementById('toggle');
+  var collapseMenu = document.getElementById('menu');
+
+  function handleClick() {
+    if (collapseMenu.style.display === 'block') {
+      collapseMenu.style.display = 'none';
+    } else {
+      collapseMenu.style.display = 'block';
+    }
+  }
+
+  toggleBtn.addEventListener('click', handleClick);
+</script>
