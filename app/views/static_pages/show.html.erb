@@ -1,4 +1,11 @@
-<h1><%= @page.title %></h1>
-<div>
-  <%= @page.content.html_safe %>
+<%= render 'layouts/header' %>
+
+<div class="relative isolate overflow-hidden py-24 sm:py-32 mt-14">
+  <%= image_tag 'image.png', alt: 'Background', class: "absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center"%>
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl lg:mx-0">
+      <h2 class="text-4xl text-gray-500 font-bold tracking-tight sm:text-6xl"><%= @page.title %></h2>
+      <p class="mt-6 text-lg leading-8 text-black"><%= @page.content.html_safe %></p>
+    </div>
+  </div>
 </div>

@@ -1,21 +1,24 @@
-<header class="bg-[#efe3d9] w-screen ">
-  <nav class="flex w-[80%] h-14 justify-between mx-auto py-5 items-center">
+<header class="bg-[#efe3d9] z-10 w-screen fixed top-0 left-0 right-0">
+  <nav class="flex md:w-[80%] h-14 justify-between mx-auto py-5 items-center text-gray-700 ">
     <ul class="flex gap-4 list-none items-center m-0">
       <li>
-        <%= link_to 'HOME', static_page_path('home') %>
+        <%= link_to 'HOME', static_page_path('home'), class: "#{current_page?(static_page_path('home')) ? 'underline decoration-2 underline-offset-4' : 'no-underline'} hover:text-gray-500" %>
       </li>
       <li>
-        <%= link_to 'SHOP', products_path %>
+        <%= link_to 'SHOP', products_path,
+            class: "#{current_page?(products_path) ? 'underline decoration-2 underline-offset-4' : 'no-underline'} hover:text-gray-500" %>
       </li>
       <li>
-        <%= link_to 'ABOUT', static_page_path('about') %>
+        <%= link_to 'ABOUT', static_page_path('about'), class: "#{current_page?(static_page_path('about')) ? 'underline decoration-2 underline-offset-4' : 'no-underline'} hover:text-gray-500" %>
       </li>
       <li>
-        <%= link_to 'CONTACT', static_page_path('contact') %>
+        <%= link_to 'CONTACT', static_page_path('contact'), class: "#{current_page?(static_page_path('contact')) ? 'underline decoration-2 underline-offset-4' : 'no-underline'} hover:text-gray-500" %>
       </li>
 
     </ul>
-    <%= image_tag 'Glamour.png', alt: "LOGO", class: "w-24 h-auto" %>
+    <%= link_to static_page_path('home') do %>
+      <%= image_tag 'Glamour.png', alt: "LOGO", class: "w-24 h-auto" %>
+    <% end %>
     <ul class="flex gap-4 list-none items-center m-0">
       <li>
         <div class="bg-[#E6CDBA] rounded px-3 py-2 ">LOGIN</div>
