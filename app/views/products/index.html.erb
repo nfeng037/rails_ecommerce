@@ -1,32 +1,60 @@
 <%= render 'layouts/header' %>
 <div class="flex justify-center w-[80%] mx-auto mt-14">
-  <div class="w-[30%] mt-10">
+  <div class="w-[30%] mt-10 ml-4">
     <ul class="flex flex-col gap-8">
+      <li class="mr-10 text-gray-500/[0.6]">
+        <%= link_to 'All Product', products_path  %>
+      </li>
+      <li class="text-[#be916e]">
+        <%= link_to 'ON SALE!!', products_path(active:true), class:"#{current_page?(products_path(active:true)) ? 'font-bold underline' : 'font-normal'}"%>
+      </li>
       <li>
         <p class="font-bold text-lg border-b pb-1 mr-10">Product Type</p>
-        <ul class="flex flex-col gap-4 mt-2">
-          <li>
-            <%= link_to 'Clear Gel', products_path(category_id:1), class: "#{current_page?(products_path(category_id:1)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
-          </li>
-          <li>
-            <%= link_to 'Color Gel', products_path(category_id:2), class:"#{current_page?(products_path(category_id:2)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
-          </li>
-          <li>
+        <ul class="flex flex-col gap-2 mt-2">
+          <li class="text-sm">
             <%= link_to 'Art', products_path(category_id:3), class: "#{current_page?(products_path(category_id:3)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
           </li>
-          <li>
-            <%= link_to 'Tools', products_path(category_id:4), class:"#{current_page?(products_path(category_id:4)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+          <li class="text-sm">
+            <%= link_to 'Clear Gel', products_path(category_id:1), class: "#{current_page?(products_path(category_id:1)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
           </li>
-          <li>
+          <li class="text-sm">
+            <%= link_to 'Color Gel', products_path(category_id:2), class:"#{current_page?(products_path(category_id:2)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+          </li>
+          <li class="text-sm">
+            <%= link_to 'Nail polish', products_path(category_id:6), class: "#{current_page?(products_path(category_id:6)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+          </li>
+          <li class="text-sm">
             <%= link_to 'Solution', products_path(category_id:5), class:"#{current_page?(products_path(category_id: 5)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
           </li>
-          <li>
-            <%= link_to 'Nail polish', products_path(category_id:6), class: "#{current_page?(products_path(category_id:6)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+          <li class="text-sm">
+            <%= link_to 'Tools', products_path(category_id:4), class:"#{current_page?(products_path(category_id:4)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
           </li>
         </ul>
       </li>
       <li>
         <p class="font-bold text-lg border-b pb-1 mr-10">Brand</p>
+        <ul class="flex flex-col gap-2 mt-2">
+          <li class="text-sm">
+            <%= link_to 'Ageha', products_path(name: 'Ageha'), class:"#{current_page?(products_path(name: 'Ageha')) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+          </li>
+          <li class="text-sm">
+            <%= link_to 'Anna', products_path(name: 'Anna'), class:"#{current_page?(products_path(name: 'Anna')) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+          </li>
+          <li class="text-sm">
+            <%= link_to 'CLETO', products_path(name: 'CLETO'), class:"#{current_page?(products_path(name: 'CLETO')) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+          </li>
+          <li class="text-sm">
+            <%= link_to 'DINAGEL', products_path(name: 'DINAGEL'), class:"#{current_page?(products_path(name: 'DINAGEL')) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+          </li>
+
+          <li class="text-sm">
+            <%= link_to 'Moov', products_path(name: 'Moov'), class:"#{current_page?(products_path(name: 'Moov')) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+          </li>
+
+          <li class="text-sm">
+            <%= link_to "L'Oreal", products_path(name: "L'Oreal"), class:"#{current_page?(products_path(name: "L'Oreal")) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+          </li>
+        </ul>
       </li>
 
     </ul>
@@ -45,19 +73,31 @@
     </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
         <% @products.each do |product| %>
-          <%= link_to product_path(product), class:"shadow-md overflow-hidden rounded cursor-pointer hover:-translate-y-2 transition-all relative" do %>
-            <div class="w-48 h-48 lg:w-[250px] lg:h-[250px] p-4 overflow-hidden mx-auto aspect-w-16 aspect-h-8 md:mb-2 mb-4">
-              <%= image_tag product.image, alt:product.name%>
-            </div>
-            <div class="p-6 bg-white">
-              <h3 class="text-lg h-20 text-gray-600/[0.7]"><%= product.name %></h3>
-              <h4 class="text-lg text-gray-700 font-bold mt-2">$<%= product.price %></h4>
-              <button type="button"
-                      class="w-full mt-6 px-4 py-3 bg-[#E6CDBA] hover:bg-[#BE916E] font-medium text-white rounded-full">
-                Add to cart
-              </button>
-            </div>
-          <% end %>
+          <div class="shadow-md overflow-hidden rounded cursor-pointer hover:-translate-y-2 transition-all relative">
+            <%= link_to product_path(product)  do %>
+              <div class="w-48 h-48 lg:w-[250px] lg:h-[250px] p-4 overflow-hidden mx-auto aspect-w-16 aspect-h-8 md:mb-2 mb-4">
+                <%= image_tag product.image, alt:product.name%>
+              </div>
+            <% end %>
+              <div class="p-6 bg-white">
+                <%= link_to product_path(product)  do %>
+                  <h3 class="text-lg h-20 text-gray-600/[0.7]"><%= product.name %></h3>
+                <% end %>
+                <% if product.active %>
+                  <div class="flex flex-row gap-2">
+                    <p class="text-lg text-red-700 font-bold mt-2"><%= number_to_currency(product.price * 0.85, unit: "$", precision: 2) %></p>
+                    <p class="text-lg text-gray-500/[0.4] line-through mt-2"><%= number_to_currency(product.price, unit: "$") %></p>
+                  </div>
+                <% else %>
+                  <p class="text-lg text-gray-700 font-bold mt-2"><%= number_to_currency(product.price, unit: "$") %></p>
+                <% end %>
+                <button type="button"
+                        class="w-full mt-6 px-4 py-3 bg-[#E6CDBA] hover:bg-[#BE916E] font-medium text-white rounded-full">
+                  Add to cart
+                </button>
+              </div>
+
+          </div>
         <% end %>
       </div>
       <%= paginate @products %>
