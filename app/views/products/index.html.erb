@@ -13,10 +13,10 @@
         A professional brand specially developed by popular Japanese nail artist Ageha. Ageha Gel fits seamlessly into your nail needs, whether in the salon or for use in nail art.
       <p>
     </div>
-      <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
         <% @products.each do |product| %>
           <div class="shadow-md overflow-hidden rounded cursor-pointer hover:-translate-y-2 transition-all relative">
-            <div class="w-48 h-48 md:w-[150px] md:h-[150px] p-4 overflow-hidden mx-auto aspect-w-16 aspect-h-8 md:mb-2 mb-4">
+            <div class="w-48 h-48 lg:w-[250px] lg:h-[250px] p-4 overflow-hidden mx-auto aspect-w-16 aspect-h-8 md:mb-2 mb-4">
               <%= image_tag product.image, alt:product.name%>
             </div>
             <div class="p-6 bg-white">
