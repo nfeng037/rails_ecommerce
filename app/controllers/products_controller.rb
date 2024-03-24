@@ -7,6 +7,8 @@ class ProductsController < ApplicationController
       @products = Product.where('name LIKE ?', "%#{params[:name]}%").page(params[:page]).per(12)
     elsif params[:active] == "true"
       @products = Product.where(active: true).page(params[:page]).per(12)
+    elsif params[:new] == "true"
+      @products = Product.where('created_at >= ?', 3.days.ago).page(params[:page]).per(12)
     else
       @products = Product.page(params[:page]).per(12)
     end

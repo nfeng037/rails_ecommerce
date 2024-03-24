@@ -13,6 +13,9 @@
         <%= link_to 'ON SALE!!', products_path(active:true), class:"#{current_page?(products_path(active:true)) ? 'font-bold underline' : 'font-normal'}"%>
       </li>
       <li>
+        <%= link_to 'NEW', products_path(new:true) %>
+      </li>
+      <li>
         <p class="font-bold text-lg border-b pb-1 mr-10">Product Type</p>
         <ul class="flex flex-col gap-2 mt-2">
           <li class="text-sm">
