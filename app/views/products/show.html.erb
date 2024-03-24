@@ -1,2 +1,44 @@
 <%= render 'layouts/header' %>
-<p class="mt-24"><%= @product.name %></p>
+<div class="bg-[#ead6c7]">
+<div class=" pt-24 w-[80%] mx-auto">
+  <div class="p-6 lg:max-w-7xl max-w-2xl max-lg:mx-auto">
+    <div class="grid items-start grid-cols-1 lg:grid-cols-5 gap-12">
+      <div class="lg:col-span-2 w-full lg:sticky top-0 text-center">
+        <div>
+          <%= image_tag @product.image, alt:"Product", class:"w-4/5 rounded-3xl object-cover" %>
+        </div>
+      </div>
+      <div class="lg:col-span-3 mt-4">
+        <h2 class="text-2xl font-extrabold"><%= @product.name %></h2>
+        <div class="flex flex-wrap gap-4 mt-4">
+          <% if @product.active %>
+            <div class="flex flex-row gap-3">
+              <p class="text-lg text-red-700 font-bold mt-2">
+                <%= number_to_currency(@product.price * 0.85, unit: "$", precision: 2) %>
+              </p>
+              <div class="flex flex-row items-center gap-2">
+                <p class="text-lg text-gray-500/[0.4] line-through mt-2">
+                  <%= number_to_currency(@product.price, unit: "$") %>
+                </p>
+                <span class="text-sm ml-1 mt-2">Tax included</span>
+              </div>
+            </div>
+          <% else %>
+            <p class="text-lg text-gray-700 font-bold mt-2">
+              <%= number_to_currency(@product.price, unit: "$") %>
+              <span class="text-sm ml-1">Tax included</span>
+            </p>
+          <% end %>
+        </div>
+        <div class="flex flex-wrap gap-4 mt-8">
+          <button type="button" class="min-w-[200px] px-4 py-3 hover:bg-[#B58256] bg-[#B58256]/[0.5] text-white text-sm font-bold rounded hover:bg-[#B58256] transition ease-in-out delay-150 hover:-translate-y-1 duration-300">Buy now</button>
+          <button type="button" class="min-w-[200px] px-4 py-2.5 border border-[#B58256]/[0.7] bg-transparent text-[#B58256]/[0.7] text-sm font-bold rounded hover:bg-[#B58256] hover:text-white transition ease-in-out delay-150 hover:-translate-y-1 duration-300">Add to cart</button>
+        </div>
+        <div class="mt-8">
+          <h3 class="text-lg font-bold text-[#B58256] ">Description</h3>
+          <p> <%= @product.description %> </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

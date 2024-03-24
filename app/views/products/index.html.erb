@@ -5,7 +5,11 @@
       <li class="mr-10 text-gray-500/[0.6]">
         <%= link_to 'All Product', products_path  %>
       </li>
-      <li class="text-[#be916e]">
+      <li class="text-[#be916e] flex flex-row hover:text-[#be916e]/[0.5] group">
+        <svg class="flex-shrink-0 w-5 h-5 text-[#be916e] transition duration-75 group-hover:text-[#be916e]/[0.5] mr-1"
+             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 17 20">
+          <path d="M7.958 19.393a7.7 7.7 0 0 1-6.715-3.439c-2.868-4.832 0-9.376.944-10.654l.091-.122a3.286 3.286 0 0 0 .765-3.288A1 1 0 0 1 4.6.8c.133.1.313.212.525.347A10.451 10.451 0 0 1 10.6 9.3c.5-1.06.772-2.213.8-3.385a1 1 0 0 1 1.592-.758c1.636 1.205 4.638 6.081 2.019 10.441a8.177 8.177 0 0 1-7.053 3.795Z"/>
+        </svg>
         <%= link_to 'ON SALE!!', products_path(active:true), class:"#{current_page?(products_path(active:true)) ? 'font-bold underline' : 'font-normal'}"%>
       </li>
       <li>
@@ -86,7 +90,7 @@
                 <% if product.active %>
                   <div class="flex flex-row gap-2">
                     <p class="text-lg text-red-700 font-bold mt-2"><%= number_to_currency(product.price * 0.85, unit: "$", precision: 2) %></p>
-                    <p class="text-lg text-gray-500/[0.4] line-through mt-2"><%= number_to_currency(product.price, unit: "$") %></p>
+                    <p class="text-lg text-gray-500/[0.4] text-sm	line-through mt-2"><%= number_to_currency(product.price, unit: "$") %></p>
                   </div>
                 <% else %>
                   <p class="text-lg text-gray-700 font-bold mt-2"><%= number_to_currency(product.price, unit: "$") %></p>
