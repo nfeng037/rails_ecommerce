@@ -1,44 +1,72 @@
 <%= render 'layouts/header' %>
-<div class="bg-[#ead6c7]">
-<div class=" pt-24 w-[80%] mx-auto">
-  <div class="p-6 lg:max-w-7xl max-w-2xl max-lg:mx-auto">
-    <div class="grid items-start grid-cols-1 lg:grid-cols-5 gap-12">
-      <div class="lg:col-span-2 w-full lg:sticky top-0 text-center">
-        <div>
-          <%= image_tag @product.image, alt:"Product", class:"w-4/5 rounded-3xl object-cover" %>
+<div class="bg-[#e5d5c9]">
+  <div class="pt-24 pb-10 w-[80%] mx-auto">
+    <div class="p-6 lg:max-w-7xl max-w-2xl max-lg:mx-auto">
+      <div class="grid items-start grid-cols-1 lg:grid-cols-5 gap-12">
+        <div class="lg:col-span-2 w-full lg:sticky top-0 text-center">
+          <div>
+            <%= image_tag @product.image, alt:"Product", class:"w-4/5 rounded-3xl object-cover" %>
+          </div>
+        </div>
+        <div class="lg:col-span-3 mt-4">
+          <h2 class="text-2xl font-extrabold text-[#B58256]"><%= @product.name %></h2>
+          <div class="flex flex-wrap gap-4 mt-4">
+            <% if @product.active %>
+              <div class="flex flex-row gap-3">
+                <p class="text-lg text-red-700 font-bold mt-2">
+                  <%= number_to_currency(@product.price * 0.85, unit: "$", precision: 2) %>
+                </p>
+                <div class="flex flex-row items-center gap-2">
+                  <p class="text-lg text-gray-500/[0.4] line-through mt-2">
+                    <%= number_to_currency(@product.price, unit: "$") %>
+                  </p>
+                  <span class="text-sm ml-1 mt-2">Tax included</span>
+                </div>
+              </div>
+            <% else %>
+            <p class="text-lg font-bold mt-2 text-black/[0.7]">
+              <%= number_to_currency(@product.price, unit: "$") %>
+            </p>
+            <span class="text-sm ml-1 mt-2">Tax included</span>
+            <% end %>
+          </div>
+          <div class="flex flex-wrap gap-4 mt-8">
+            <button type="button" class="min-w-[200px] px-4 py-3 hover:bg-[#B58256] bg-[#B58256]/[0.5] text-white text-sm font-bold rounded hover:bg-[#B58256] transition ease-in-out delay-150 hover:-translate-y-1 duration-300 shadow-lg shadow-[#B58256]/40">Buy now</button>
+            <button type="button" class="min-w-[200px] px-4 py-2.5 border border-[#B58256]/[0.7] bg-transparent text-[#B58256]/[0.7] text-sm font-bold rounded hover:bg-[#B58256] hover:text-white transition ease-in-out delay-150 hover:-translate-y-1 duration-300 shadow-lg shadow-[#B58256]/40">Add to cart</button>
+          </div>
+          <div class="mt-8">
+            <h3 class="text-lg font-bold text-[#B58256]">Description</h3>
+            <p class="text-black/[0.7]"> <%= @product.description %> </p>
+          </div>
         </div>
       </div>
-      <div class="lg:col-span-3 mt-4">
-        <h2 class="text-2xl font-extrabold"><%= @product.name %></h2>
-        <div class="flex flex-wrap gap-4 mt-4">
-          <% if @product.active %>
-            <div class="flex flex-row gap-3">
-              <p class="text-lg text-red-700 font-bold mt-2">
-                <%= number_to_currency(@product.price * 0.85, unit: "$", precision: 2) %>
-              </p>
-              <div class="flex flex-row items-center gap-2">
-                <p class="text-lg text-gray-500/[0.4] line-through mt-2">
-                  <%= number_to_currency(@product.price, unit: "$") %>
-                </p>
-                <span class="text-sm ml-1 mt-2">Tax included</span>
-              </div>
+    </div>
+  </div>
+</div>
+<div class="bg-[#efe3d9]">
+  <div class="w-[80%] mx-auto">
+    <h4 class="text-2xl py-10 px-2 text-[#B68256]">You may also like</h4>
+    <div class="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-4">
+      <% @recommend_products.each do |product| %>
+        <div class="overflow-hidden rounded cursor-pointer hover:-translate-y-2 transition-all relative">
+          <%= link_to product_path(product)  do %>
+            <div class="w-32 h-32 lg:w-[240px] lg:h-[240px] rounded-lg overflow-hidden mx-auto aspect-w-16 aspect-h-8 md:mb-2 mb-4 ">
+              <%= image_tag product.image, alt:'product',class:"cover hover:saturate-150"%>
             </div>
-          <% else %>
-            <p class="text-lg text-gray-700 font-bold mt-2">
-              <%= number_to_currency(@product.price, unit: "$") %>
-              <span class="text-sm ml-1">Tax included</span>
-            </p>
+            <div class="p-6">
+              <h3 class="text-lg text-black/[0.4]"><%= product.name %></h3>
+              <% if product.active %>
+                <div class="flex flex-row gap-2">
+                  <p class="text-lg text-red-700 font-bold mt-2"><%= number_to_currency(product.price * 0.85, unit: "$", precision: 2) %></p>
+                  <p class="text-lg text-gray-500/[0.4] text-sm	line-through mt-2"><%= number_to_currency(product.price, unit: "$") %></p>
+                </div>
+              <% else %>
+                <p class="text-lg text-gray-700 font-bold mt-2"><%= number_to_currency(product.price, unit: "$") %></p>
+              <% end %>
+            </div>
           <% end %>
         </div>
-        <div class="flex flex-wrap gap-4 mt-8">
-          <button type="button" class="min-w-[200px] px-4 py-3 hover:bg-[#B58256] bg-[#B58256]/[0.5] text-white text-sm font-bold rounded hover:bg-[#B58256] transition ease-in-out delay-150 hover:-translate-y-1 duration-300">Buy now</button>
-          <button type="button" class="min-w-[200px] px-4 py-2.5 border border-[#B58256]/[0.7] bg-transparent text-[#B58256]/[0.7] text-sm font-bold rounded hover:bg-[#B58256] hover:text-white transition ease-in-out delay-150 hover:-translate-y-1 duration-300">Add to cart</button>
-        </div>
-        <div class="mt-8">
-          <h3 class="text-lg font-bold text-[#B58256] ">Description</h3>
-          <p> <%= @product.description %> </p>
-        </div>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

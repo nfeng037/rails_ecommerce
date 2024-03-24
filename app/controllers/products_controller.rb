@@ -14,5 +14,6 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @recommend_products = Product.order(Arel.sql('RANDOM()')).limit(4)
   end
 end
