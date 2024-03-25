@@ -9,6 +9,8 @@ class ProductsController < ApplicationController
       @products = Product.where(active: true).page(params[:page]).per(12)
     elsif params[:new] == "true"
       @products = Product.where('created_at >= ?', 3.days.ago).page(params[:page]).per(12)
+    elsif params[:update] == "true"
+      @products = Product.where('updated_at >= ?', 3.days.ago).page(params[:page]).per(12)
     else
       @products = Product.page(params[:page]).per(12)
     end
