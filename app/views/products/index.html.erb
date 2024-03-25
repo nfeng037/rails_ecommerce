@@ -1,8 +1,8 @@
 <%= render 'layouts/header' %>
 <div class="flex justify-center lg:w-[80%] w-full mx-auto mt-14">
   <aside class="fixed hidden sm:block top-[14%] left-[10.5%] z-30 lg:w-64 max-h-[86vh] overflow-auto overscroll-contain transition-transform -translate-x-full sm:translate-x-0">
-    <ul class="flex flex-col gap-8">
-      <li class="mr-10 text-gray-500/[0.6]">
+    <ul class="flex flex-col gap-6">
+      <li class="mr-10 text-gray-500/[0.6] hover:text-[#BE916E]">
         <%= link_to 'All Product', products_path  %>
       </li>
       <li class="text-[#be916e] flex flex-row hover:text-[#be916e]/[0.5] group">
@@ -10,34 +10,34 @@
              aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 17 20">
           <path d="M7.958 19.393a7.7 7.7 0 0 1-6.715-3.439c-2.868-4.832 0-9.376.944-10.654l.091-.122a3.286 3.286 0 0 0 .765-3.288A1 1 0 0 1 4.6.8c.133.1.313.212.525.347A10.451 10.451 0 0 1 10.6 9.3c.5-1.06.772-2.213.8-3.385a1 1 0 0 1 1.592-.758c1.636 1.205 4.638 6.081 2.019 10.441a8.177 8.177 0 0 1-7.053 3.795Z"/>
         </svg>
-        <%= link_to 'ON SALE!!', products_path(active:true), class:"#{current_page?(products_path(active:true)) ? 'font-bold underline' : 'font-normal'}"%>
+        <%= link_to 'ON SALE!!', products_path(active:true), class:"#{current_page?(products_path(active:true)) ? 'font-bold underline' : 'font-normal'} "%>
       </li>
       <li>
-        <%= link_to 'NEW', products_path(new:true) %>
+        <%= link_to 'NEW', products_path(new:true), class:"#{current_page?(products_path(new:true)) ? 'font-bold underline' : 'font-normal'} hover:text-[#BE916E]" %>
       </li>
       <li>
-        <%= link_to 'RECENT UPDATE', products_path(update:true) %>
+        <%= link_to 'RECENT UPDATE', products_path(update:true), class:"#{current_page?(products_path(update:true)) ? 'font-bold underline' : 'font-normal'} hover:text-[#BE916E]" %>
       </li>
       <li>
         <p class="font-bold text-lg pb-1 mr-10">Product Type</p>
         <ul class="flex flex-col gap-2 mt-2">
           <li class="text-sm">
-            <%= link_to 'Art', products_path(category_id:3), class: "#{current_page?(products_path(category_id:3)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+            <%= link_to 'Art', products_path(category_id:3), class: "#{current_page?(products_path(category_id:3)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'} hover:text-[#BE916E]" %>
           </li>
           <li class="text-sm">
-            <%= link_to 'Clear Gel', products_path(category_id:1), class: "#{current_page?(products_path(category_id:1)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+            <%= link_to 'Clear Gel', products_path(category_id:1), class: "#{current_page?(products_path(category_id:1)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'} hover:text-[#BE916E]" %>
           </li>
           <li class="text-sm">
-            <%= link_to 'Color Gel', products_path(category_id:2), class:"#{current_page?(products_path(category_id:2)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+            <%= link_to 'Color Gel', products_path(category_id:2), class:"#{current_page?(products_path(category_id:2)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'} hover:text-[#BE916E]" %>
           </li>
           <li class="text-sm">
-            <%= link_to 'Nail polish', products_path(category_id:6), class: "#{current_page?(products_path(category_id:6)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+            <%= link_to 'Nail polish', products_path(category_id:6), class: "#{current_page?(products_path(category_id:6)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'} hover:text-[#BE916E]" %>
           </li>
           <li class="text-sm">
-            <%= link_to 'Solution', products_path(category_id:5), class:"#{current_page?(products_path(category_id: 5)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+            <%= link_to 'Solution', products_path(category_id:5), class:"#{current_page?(products_path(category_id: 5)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'} hover:text-[#BE916E]" %>
           </li>
           <li class="text-sm">
-            <%= link_to 'Tools', products_path(category_id:4), class:"#{current_page?(products_path(category_id:4)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+            <%= link_to 'Tools', products_path(category_id:4), class:"#{current_page?(products_path(category_id:4)) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'} hover:text-[#BE916E]" %>
           </li>
         </ul>
       </li>
@@ -45,24 +45,24 @@
         <p class="font-bold text-lg pb-1 mr-10">Brand</p>
         <ul class="flex flex-col gap-2 mt-2">
           <li class="text-sm">
-            <%= link_to 'Ageha', products_path(name: 'Ageha'), class:"#{current_page?(products_path(name: 'Ageha')) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+            <%= link_to 'Ageha', products_path(name: 'Ageha'), class:"#{current_page?(products_path(name: 'Ageha')) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'} hover:text-[#BE916E]" %>
           </li>
           <li class="text-sm">
-            <%= link_to 'Anna', products_path(name: 'Anna'), class:"#{current_page?(products_path(name: 'Anna')) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+            <%= link_to 'Anna', products_path(name: 'Anna'), class:"#{current_page?(products_path(name: 'Anna')) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'} hover:text-[#BE916E]" %>
           </li>
           <li class="text-sm">
-            <%= link_to 'CLETO', products_path(name: 'CLETO'), class:"#{current_page?(products_path(name: 'CLETO')) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+            <%= link_to 'CLETO', products_path(name: 'CLETO'), class:"#{current_page?(products_path(name: 'CLETO')) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'} hover:text-[#BE916E]" %>
           </li>
           <li class="text-sm">
-            <%= link_to 'DINAGEL', products_path(name: 'DINAGEL'), class:"#{current_page?(products_path(name: 'DINAGEL')) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
-          </li>
-
-          <li class="text-sm">
-            <%= link_to 'Moov', products_path(name: 'Moov'), class:"#{current_page?(products_path(name: 'Moov')) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+            <%= link_to 'DINAGEL', products_path(name: 'DINAGEL'), class:"#{current_page?(products_path(name: 'DINAGEL')) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'} hover:text-[#BE916E]" %>
           </li>
 
           <li class="text-sm">
-            <%= link_to "L'Oreal", products_path(name: "L'Oreal"), class:"#{current_page?(products_path(name: "L'Oreal")) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'}" %>
+            <%= link_to 'Moov', products_path(name: 'Moov'), class:"#{current_page?(products_path(name: 'Moov')) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'} hover:text-[#BE916E]" %>
+          </li>
+
+          <li class="text-sm">
+            <%= link_to "L'Oreal", products_path(name: "L'Oreal"), class:"#{current_page?(products_path(name: "L'Oreal")) ? 'text-[#be916e] font-medium underline underline-offset-4' : 'text-gray-500/[0.6]'} hover:text-[#BE916E]" %>
           </li>
         </ul>
       </li>
