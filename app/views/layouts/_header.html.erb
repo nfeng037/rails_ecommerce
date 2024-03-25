@@ -19,17 +19,17 @@
     </div>
     <ul id="menu" class="lg:!flex lg:space-x-5 max-lg:space-y-2 max-lg:hidden max-lg:py-4 max-lg:w-full">
       <li>
-        <%= link_to 'HOME', static_page_path('home'), class: "#{current_page?(static_page_path('home')) ? 'underline decoration-2 underline-offset-4' : 'no-underline'} hover:text-gray-500" %>
+        <%= link_to 'HOME', static_page_path('home'), class: "#{current_page?(static_page_path('home')) ? 'underline decoration-2 underline-offset-4' : 'no-underline'} hover:text-[#b68256]" %>
       </li>
       <li>
         <%= link_to 'SHOP', products_path,
-            class: "#{current_page?(products_path) ? 'underline decoration-2 underline-offset-4' : 'no-underline'} hover:text-gray-500" %>
+            class: "#{current_page?(products_path) ? 'underline decoration-2 underline-offset-4' : 'no-underline'} hover:text-[#b68256]" %>
       </li>
       <li>
-        <%= link_to 'ABOUT', static_page_path('about'), class: "#{current_page?(static_page_path('about')) ? 'underline decoration-2 underline-offset-4' : 'no-underline'} hover:text-gray-500" %>
+        <%= link_to 'ABOUT', static_page_path('about'), class: "#{current_page?(static_page_path('about')) ? 'underline decoration-2 underline-offset-4' : 'no-underline'} hover:text-[#b68256]" %>
       </li>
       <li>
-        <%= link_to 'CONTACT', static_page_path('contact'), class: "#{current_page?(static_page_path('contact')) ? 'underline decoration-2 underline-offset-4' : 'no-underline'} hover:text-gray-500" %>
+        <%= link_to 'CONTACT', static_page_path('contact'), class: "#{current_page?(static_page_path('contact')) ? 'underline decoration-2 underline-offset-4' : 'no-underline'} hover:text-[#b68256]" %>
       </li>
     </ul>
   </nav>
