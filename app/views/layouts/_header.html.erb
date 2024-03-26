@@ -38,10 +38,10 @@
 
   <div class="relative w-full hidden bg-white shadow-xl" id="search-content">
     <div class="container mx-auto py-4 text-black">
-      <%= form_tag search_path, method: :get, class: "w-full text-grey-800 transition focus:outline-none focus:border-transparent p-2 appearance-none leading-normal text-xl lg:text-2xl" do %>
-        <%= text_field_tag :query, params[:query], class: "rounded" %>
-        <%= select_tag :category, options_for_select([['All Product', ''], ['Art', '3'], ['Clear Gel', '1'], ['Color Gel', '2'], ['Nail Polish', '6'], ['Solution', '5'], ['Tools', '2']], selected: params[:category]), class: "rounded" %>
-        <%= submit_tag "Search", class: "bg-[#a6c1ee] text-white px-3 py-2 rounded hover:bg-[#87acec]" %>
+      <%= form_with url:products_path, method: :get, class: "w-full text-grey-800 transition focus:outline-none focus:border-transparent p-2 appearance-none leading-normal text-xl lg:text-2xl" do |form|%>
+        <%= form.text_field :search, placeholder: "Search products...", class: "rounded" %>
+        <%= form.collection_select :category_id, Category.all, :id, :name, include_blank: "All Categories", class: "rounded" %>
+        <%= form.submit "Search", class: "bg-[#a6c1ee] text-white px-3 py-2 rounded hover:bg-[#87acec]" %>
       <% end %>
     </div>
   </div>

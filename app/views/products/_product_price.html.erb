@@ -1,0 +1,8 @@
+<% if product.active %>
+  <div class="flex flex-row gap-2 mt-3">
+    <p class="text-lg text-red-700 font-bold mt-2"><%= number_to_currency(product.price * 0.85, unit: "$", precision: 2) %></p>
+    <p class="text-lg text-gray-500/[0.4] text-sm	line-through mt-2"><%= number_to_currency(product.price, unit: "$") %></p>
+  </div>
+<% else %>
+  <p class="text-lg text-gray-700 font-bold mt-3"><%= number_to_currency(product.price, unit: "$") %></p>
+<% end %>
