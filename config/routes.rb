@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   get 'pages/:identifier', to: 'static_pages#show', as: :static_page
   resources :products, path: 'product'
+  get 'search/index'
+  get '/search', to: 'search#index'
 end

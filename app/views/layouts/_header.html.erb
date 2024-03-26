@@ -6,9 +6,11 @@
     <div class="flex items-center ml-auto lg:order-1">
         <button class="bg-[#E6CDBA] rounded px-3 py-2 mr-6">LOGIN</button>
         <p class="mr-6">CART (0) </p>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-        </svg>
+        <button id="search-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+          </svg>
+        </button>
         <button id="toggle" class='lg:hidden ml-7'>
           <svg class="w-7 h-7" fill="#333" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd"
@@ -33,6 +35,16 @@
       </li>
     </ul>
   </nav>
+
+  <div class="relative w-full hidden bg-white shadow-xl" id="search-content">
+    <div class="container mx-auto py-4 text-black">
+      <%= form_tag search_path, method: :get, class: "w-full text-grey-800 transition focus:outline-none focus:border-transparent p-2 appearance-none leading-normal text-xl lg:text-2xl" do %>
+        <%= text_field_tag :query, params[:query], class: "rounded" %>
+        <%= select_tag :category, options_for_select([['All Product', ''], ['Art', '3'], ['Clear Gel', '1'], ['Color Gel', '2'], ['Nail Polish', '6'], ['Solution', '5'], ['Tools', '2']], selected: params[:category]), class: "rounded" %>
+        <%= submit_tag "Search", class: "bg-[#a6c1ee] text-white px-3 py-2 rounded hover:bg-[#87acec]" %>
+      <% end %>
+    </div>
+  </div>
 </header>
 
 
@@ -49,4 +61,17 @@
   }
 
   toggleBtn.addEventListener('click', handleClick);
+
+  var toggleSearch = document.getElementById('search-toggle');
+  var searchContent = document.getElementById('search-content');
+
+  function handleSearchClick() {
+    if (searchContent.style.display === 'block') {
+      searchContent.style.display = 'none';
+    } else {
+      searchContent.style.display = 'block';
+    }
+  }
+
+  toggleSearch.addEventListener('click', handleSearchClick);
 </script>
