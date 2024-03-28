@@ -18,7 +18,8 @@ class CartController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: [turbo_stream.replace('cart', partial: 'cart/cart', locals: { cart: @cart})]
+        render turbo_stream: [turbo_stream.replace('cart', partial: 'cart/cart', locals: { cart: @cart}),
+                              turbo_stream.replace('cart_quantity', partial: 'cart/cart_quantity', locals: {cart: @cart})]
       end
     end
 
@@ -34,7 +35,8 @@ class CartController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: [turbo_stream.replace('cart', partial: 'cart/cart', locals: { cart: @cart})]
+        render turbo_stream: [turbo_stream.replace('cart', partial: 'cart/cart', locals: { cart: @cart}),
+                              turbo_stream.replace('cart_quantity', partial: 'cart/cart_quantity', locals: {cart: @cart})]
       end
     end
   end
@@ -44,7 +46,8 @@ class CartController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: [turbo_stream.replace('cart', partial: 'cart/cart', locals: { cart: @cart})]
+        render turbo_stream: [turbo_stream.replace('cart', partial: 'cart/cart', locals: { cart: @cart}),
+                              turbo_stream.replace('cart_quantity', partial: 'cart/cart_quantity', locals: {cart: @cart})]
       end
     end
   end
