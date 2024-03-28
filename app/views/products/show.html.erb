@@ -15,7 +15,11 @@
           </div>
           <div class="flex flex-wrap gap-4 mt-8">
             <button type="button" class="min-w-[200px] px-4 py-3 hover:bg-[#B58256] bg-[#B58256]/[0.5] text-white text-sm font-bold rounded hover:bg-[#B58256] transition ease-in-out delay-150 hover:-translate-y-1 duration-300 shadow-lg shadow-[#B58256]/40">Buy now</button>
-            <button type="button" class="min-w-[200px] px-4 py-2.5 border border-[#B58256]/[0.7] bg-transparent text-[#B58256]/[0.7] text-sm font-bold rounded hover:bg-[#B58256] hover:text-white transition ease-in-out delay-150 hover:-translate-y-1 duration-300 shadow-lg shadow-[#B58256]/40">Add to cart</button>
+            <%= form_with(url: cart_add_path) do |f|%>
+              <%= f.hidden_field :id, value: @product.id %>
+              <%= f.number_field :quantity, value: 1, min: 1 %>
+              <%= f.submit "Add to cart", class: "min-w-[200px] px-4 py-2.5 border border-[#B58256]/[0.7] bg-transparent text-[#B58256]/[0.7] text-sm font-bold rounded hover:bg-[#B58256] hover:text-white transition ease-in-out delay-150 hover:-translate-y-1 duration-300 shadow-lg shadow-[#B58256]/40" %>
+            <% end %>
           </div>
           <div class="mt-8">
             <h3 class="text-lg font-bold text-[#B58256]">Description</h3>

@@ -8,4 +8,7 @@ class Product < ApplicationRecord
   end
 
   has_one_attached :image
+
+  has_many :cartItems
+  has_many :carts, through: :cartItems
 end

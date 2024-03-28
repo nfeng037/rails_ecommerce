@@ -1,0 +1,36 @@
+<% @cart.cartItems.each do |cartItem| %>
+  <% product = cartItem.product %>
+  <div id="<%= "cart-#{product.id}" %>">
+  <%= link_to product_path(product)  do %>
+    <div class="w-48 h-48 lg:w-[240px] lg:h-[240px] p-2 overflow-hidden mx-auto aspect-w-16 aspect-h-8 md:mb-2 mb-4">
+      <%= image_tag product.image, alt:product.name, class:"w-48 h-48 mx-auto"%>
+    </div>
+  <% end %>
+    <div class="p-4 bg-white">
+      <%= link_to product_path(product)  do %>
+        <h3 class="text-medium h-16 text-gray-600/[0.7]"><%= product.name %></h3>
+      <% end %>
+      <%= render 'products/product_price', product: product %>
+
+      <%= form_with(url: cart_add_path) do |f|%>
+        <%= f.hidden_field :id, value: product.id %>
+        <%= f.hidden_field :quantity, value: 1, min:1 %>
+        <%= f.submit "+" %>
+      <% end %>
+
+      <span><%= cartItem.quantity %></span>
+
+      <%= form_with(url: cart_decrease_path, method: :post) do |f| %>
+        <%= f.hidden_field :id, value: cartItem.id %>
+        <%= f.submit "-" %>
+      <% end %>
+
+      <%= form_with(url: cart_remove_path) do |f|%>
+        <%= f.hidden_field :id, value: cartItem.id %>
+        <%= f.hidden_field :quantity, value: cartItem.quantity %>
+        <%= f.submit "X" %>
+      <% end %>
+      <strong>Total</strong>
+      <%= number_to_currency(cartItem.total, unit: "$", precision: 2) %>
+  </div>
+<% end %>
