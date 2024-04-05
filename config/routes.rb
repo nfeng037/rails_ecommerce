@@ -19,4 +19,6 @@ Rails.application.routes.draw do
 
   get 'search/index'
   get '/search', to: 'search#index'
+
+  resources :orders, only: [:new, :create, :show]
 end
