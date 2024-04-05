@@ -1,4 +1,4 @@
 class Order < ApplicationRecord
   belongs_to :user
-  belongs_to :province, optional: true
+  belongs_to :province
 end
