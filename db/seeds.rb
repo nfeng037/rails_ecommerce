@@ -232,3 +232,27 @@
 #   puts "error"
 # end
 
+# Add Taxes into Province
+provinces = [
+  { name: 'Alberta', gst_rate: 5, pst_rate: 0, hst_rate: 0 },
+  { name: 'British Columbia', gst_rate: 5, pst_rate: 7, hst_rate: 0 },
+  { name: 'Manitoba', gst_rate: 5, pst_rate: 7, hst_rate: 0 },
+  { name: 'New Brunswick', gst_rate: 0, pst_rate: 0, hst_rate: 15 },
+  { name: 'Newfoundland and Labrador', gst_rate: 0, pst_rate: 0, hst_rate: 15 },
+  { name: 'Northwest Territories', gst_rate: 5, pst_rate: 0, hst_rate: 0 },
+  { name: 'Nova Scotia', gst_rate: 0, pst_rate: 0, hst_rate: 15 },
+  { name: 'Nunavut', gst_rate: 5, pst_rate: 0, hst_rate: 0 },
+  { name: 'Ontario', gst_rate: 0, pst_rate: 0, hst_rate: 13 },
+  { name: 'Prince Edward Island', gst_rate: 0, pst_rate: 0, hst_rate: 15 },
+  { name: 'Quebec', gst_rate: 5, pst_rate: 9.975, hst_rate: 0 },
+  { name: 'Saskatchewan', gst_rate: 5, pst_rate: 6, hst_rate: 0 },
+  { name: 'Yukon', gst_rate: 5, pst_rate: 0, hst_rate: 0 }
+]
+
+provinces.each do |province|
+  Province.find_or_create_by(name: province[:name]) do |p|
+    p.gst_rate = province[:gst_rate]
+    p.pst_rate = province[:pst_rate]
+    p.hst_rate = province[:hst_rate]
+  end
+end
