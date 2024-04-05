@@ -1,4 +1,4 @@
-<p>Subtotal: <%= number_to_currency(calculate_total_price(@order)) %></p>
+<p>Subtotal: <%= number_to_currency(@order.cart.total) %></p>
 <% unless @taxes[:gst].zero? %>
   <p>GST : <%= number_to_currency(@taxes[:gst]) %></p>
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_05_060713) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_05_135959) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -110,6 +110,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_05_060713) do
     t.integer "cart_id", null: false
     t.integer "province_id", null: false
     t.integer "user_id"
+    t.boolean "is_guest"
     t.index ["cart_id"], name: "index_orders_on_cart_id"
     t.index ["province_id"], name: "index_orders_on_province_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -149,7 +150,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_05_060713) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "guest"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

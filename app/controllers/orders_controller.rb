@@ -27,34 +27,22 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
 
-    Rails.logger.info("Current user: #{current_user.inspect}")
-    Rails.logger.info("Current cart: #{current_cart.inspect}")
+    @order.user = current_user if user_signed_in?
 
-    if user_signed_in?
-      @order.user = current_user
-    else
-      guest_user = User.create(guest: true)
-      @order.user = guest_user if guest_user.persisted?
-    end
 
     @order.cart = current_cart
 
     if @order.save
       redirect_to @order, notice: 'Order was successfully created.'
     else
-      guest_user = User.new(guest: true)
-      if guest_user.save
-        @order.user = guest_user
-      else
-        Rails.logger.info(guest_user.errors.full_messages)
-        @order.errors.add(:base, "Failed to create guest user")
-        render :new
-      end
+      flash.now[:alert] = @order.errors.full_messages.to_sentence
+      @provinces = Province.all
+      render :new
     end
   end
 
   private
     def order_params
-      params.require(:order).permit(:province_id, :cart_id, :address, :city, :postal_code)
+      params.require(:order).permit(:province_id, :cart_id, :address, :city, :postal_code, :is_guest)
     end
 end
