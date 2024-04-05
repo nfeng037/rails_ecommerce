@@ -1,0 +1,27 @@
+<%= form_with model: @order, local: true do |form| %>
+  <% if user_signed_in? && @addresses.any? %>
+    <div>
+      <label>Select address:</label>
+      <%= form.collection_select :address_id, @addresses, :id, :full_address, prompt: "Select your address" %>
+    </div>
+  <% else %>
+    <div>
+      <label>Address Line:</label>
+      <%= form.text_field :address_line %>
+    </div>
+    <div>
+      <label>City:</label>
+      <%= form.text_field :city %>
+    </div>
+    <div>
+      <label>Postal Code:</label>
+      <%= form.text_field :postal_code %>
+    </div>
+    <div>
+      <label>Province:</label>
+      <%= form.collection_select :province_id, Province.all, :id, :name, prompt: "Select your province" %>
+    </div>
+  <% end %>
+
+  <%= form.submit "Submit Order" %>
+<% end %>
