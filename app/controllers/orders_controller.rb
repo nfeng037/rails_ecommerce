@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
 
     @order.user = current_user if user_signed_in?
-
+    @order.is_guest = !user_signed_in?
 
     @order.cart = current_cart
 
@@ -43,6 +43,6 @@ class OrdersController < ApplicationController
 
   private
     def order_params
-      params.require(:order).permit(:province_id, :cart_id, :address, :city, :postal_code, :is_guest)
+      params.require(:order).permit(:province_id, :cart_id, :address, :name, :phone_number, :city, :postal_code, :is_guest)
     end
 end

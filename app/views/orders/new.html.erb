@@ -1,3 +1,5 @@
+<%= render 'layouts/header' %>
+<div class="mt-24">
 <%= form_with model: @order, local: true do |form| %>
   <% if user_signed_in? && @addresses.any? %>
     <div>
@@ -5,6 +7,14 @@
       <%= form.collection_select :address_id, @addresses, :id, :full_address, prompt: "Select your address" %>
     </div>
   <% else %>
+    <div>
+      <label>Name:</label>
+      <%= form.text_field :name %>
+    </div>
+    <div>
+      <label>Phone Number:</label>
+      <%= form.text_field :phone_number %>
+    </div>
     <div>
       <label>Address:</label>
       <%= form.text_field :address %>
@@ -25,3 +35,5 @@
 
   <%= form.submit "Submit Order" %>
 <% end %>
+</div>
+<%= render 'layouts/footer' %>

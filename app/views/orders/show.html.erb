@@ -1,3 +1,5 @@
+<%= render 'layouts/header' %>
+<div class="mt-24">
 <p>Subtotal: <%= number_to_currency(@order.cart.total) %></p>
 <% unless @taxes[:gst].zero? %>
   <p>GST : <%= number_to_currency(@taxes[:gst]) %></p>
@@ -9,3 +11,5 @@
   <p>HST: <%= number_to_currency(@taxes[:hst]) %></p>
 <% end %>
 <p>Total: <%= number_to_currency(@total_with_taxes) %></p>
+</div>
+<%= render 'layouts/footer' %>
