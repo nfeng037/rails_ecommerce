@@ -1,0 +1,11 @@
+<p>Subtotal: <%= number_to_currency(calculate_total_price(@order)) %></p>
+<% unless @taxes[:gst].zero? %>
+  <p>GST : <%= number_to_currency(@taxes[:gst]) %></p>
+<% end %>
+<% unless @taxes[:pst].zero? %>
+  <p>PST: <%= number_to_currency(@taxes[:pst]) %></p>
+<% end %>
+<% unless @taxes[:hst].zero? %>
+  <p>HST: <%= number_to_currency(@taxes[:hst]) %></p>
+<% end %>
+<p>Total: <%= number_to_currency(@total_with_taxes) %></p>

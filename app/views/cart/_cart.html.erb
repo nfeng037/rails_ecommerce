@@ -100,12 +100,11 @@
               Applicable taxes will be calculated at checkout.
             </li>
           </ul>
-          <button
-            type="button"
+          <div
             class="mt-6 text-md px-6 py-2.5 w-full bg-[#CDAC90] hover:bg-[#B68256] text-white rounded"
           >
-            Check out
-          </button>
+            <%= link_to 'Check Out', new_order_path, class:"flex justify-center", data: {turbo: false} %>
+          </div>
         </div>
       </div>
     <% else %>
