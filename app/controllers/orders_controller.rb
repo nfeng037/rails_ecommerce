@@ -9,7 +9,13 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.cart = @cart
-    set_taxes(@order.province)
+
+    if params[:order][:province_id].present?
+      province = Province.find_by(id: params[:order][:province_id])
+      set_taxes(province) if province
+    else
+      set_default_taxes
+    end
 
     @order.user = current_user if user_signed_in?
     @order.is_guest = !user_signed_in?

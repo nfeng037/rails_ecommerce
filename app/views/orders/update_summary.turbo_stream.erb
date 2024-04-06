@@ -1,0 +1,5 @@
+<turbo-stream action="replace" target="tax_summary">
+  <template>
+    <%= render partial: "orders/order_summary", formats: :html, locals: { taxes: @taxes, total_with_taxes: @total_with_taxes } %>
+  </template>
+</turbo-stream>
