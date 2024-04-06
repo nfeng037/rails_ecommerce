@@ -1,65 +1,69 @@
 <%= render 'layouts/header' %>
 <div class="mt-24 w-[80%] mx-auto flex">
-  <%= turbo_frame_tag "order_form" do %>
-    <%= form_with model: @order, local: true do |form| %>
-      <% if user_signed_in? && @addresses.any? %>
-        <div>
-          <label>Select address:</label>
-          <%= form.collection_select :address_id, @addresses, :id, :full_address, prompt: "Select your address" %>
-        </div>
-      <% else %>
-        <div>
-        <label>Name:</label>
-        <%= form.text_field :name %>
-      </div>
-      <div>
-        <label>Phone Number:</label>
-        <%= form.text_field :phone_number %>
-      </div>
-      <div>
-        <label>Address:</label>
-        <%= form.text_field :address %>
-      </div>
-      <div>
-        <label>City:</label>
-        <%= form.text_field :city %>
-      </div>
-      <div>
-        <label>Postal Code:</label>
-        <%= form.text_field :postal_code %>
-      </div>
-      <%= form.hidden_field :province_id, id: "order_province_id" %>
-      <% end %>
-
-      <%= form.submit "Place Order" %>
-    <% end %>
-  <% end %>
-
   <div>
-    <label>Province:</label>
+    <%= turbo_frame_tag "order_form" do %>
+      <%= form_with model: @order, local: true do |form| %>
+        <% if user_signed_in? && @addresses.any? %>
+          <div>
+            <label>Select address:</label>
+            <%= form.collection_select :address_id, @addresses, :id, :full_address, prompt: "Select your address" %>
+          </div>
+        <% else %>
+          <div>
+            <label>Name:</label>
+            <%= form.text_field :name %>
+          </div>
+          <div>
+            <label>Phone Number:</label>
+            <%= form.text_field :phone_number %>
+          </div>
+          <div>
+            <label>Address:</label>
+            <%= form.text_field :address %>
+          </div>
+          <div>
+            <label>City:</label>
+            <%= form.text_field :city %>
+          </div>
+          <div>
+            <label>Postal Code:</label>
+            <%= form.text_field :postal_code %>
+          </div>
+          <div>
+            <label>Province:</label>
+            <%= form.select :province_id, Province.all.collect { |p| [p.name, p.id] }, { prompt: 'Select your province' } %>
+          </div>
+        <% end %>
+
+        <%= form.submit "Place Order" %>
+      <% end %>
+    <% end %>
+
     <%= turbo_frame_tag "province_selection" do %>
       <%= form_with model: @order, url: update_summary_orders_path, method: :post, data: { turbo_frame: "tax_summary" }, html: { id: "province-selection-form", data: { turbo: "true" } } do |form| %>
-        <%= form.select :province_id, Province.all.collect { |p| [p.name, p.id] }, { prompt: 'Select your province' }, { onchange: 'this.form.requestSubmit()' } %>
+        <%= form.hidden_field :province_id, id: "hidden_province_id" %>
       <% end %>
-
     <% end %>
   </div>
 
-  <%= turbo_frame_tag "tax_summary" do %>
-    <%= render partial: "orders/order_summary", locals: { taxes: @taxes, total_with_taxes: @total_with_taxes } %>
-  <% end %>
+  <div>
+    <%= turbo_frame_tag "tax_summary" do %>
+      <%= render partial: "orders/order_summary", locals: { taxes: @taxes, total_with_taxes: @total_with_taxes } %>
+    <% end %>
+  </div>
 </div>
 
 <%= render 'layouts/footer' %>
 
 <script>
 document.addEventListener("turbo:load", () => {
-  const provinceSelect = document.querySelector("#province-selection-form select[name='order[province_id]']");
-  const mainFormProvinceIdField = document.querySelector("#order_province_id");
+  const provinceSelect = document.querySelector("#order_province_id");
+  const hiddenProvinceInput = document.querySelector("#hidden_province_id");
 
-  if (provinceSelect && mainFormProvinceIdField) {
+  if (provinceSelect && hiddenProvinceInput) {
     provinceSelect.addEventListener("change", () => {
-      mainFormProvinceIdField.value = provinceSelect.value;
+      hiddenProvinceInput.value = provinceSelect.value;
+      document.getElementById("province-selection-form").requestSubmit();
     });
   }
 });
