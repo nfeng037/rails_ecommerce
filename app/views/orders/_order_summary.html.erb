@@ -1,0 +1,15 @@
+
+<% if @cart && @cart.cart_items.any? %>
+  <p>Subtotal: <%= number_to_currency(@cart.total) %></p>
+  <% @cart.cart_items.each do |cart_item| %>
+    <%= cart_item.product.name %>
+    <%= cart_item.quantity %>
+  <% end %>
+  <p>GST: <%= number_to_currency(@taxes[:gst]) %></p>
+  <p>PST: <%= number_to_currency(@taxes[:pst]) %></p>
+  <p>HST: <%= number_to_currency(@taxes[:hst]) %></p>
+  <p>Total: <%= number_to_currency(@total_with_taxes) %></p>
+
+<% else %>
+  <p>Please add items to your cart.</p>
+<% end %>

@@ -1,13 +1,15 @@
 <%= render 'layouts/header' %>
 <div class="mt-24">
-<%= form_with model: @order, local: true do |form| %>
-  <% if user_signed_in? && @addresses.any? %>
-    <div>
-      <label>Select address:</label>
-      <%= form.collection_select :address_id, @addresses, :id, :full_address, prompt: "Select your address" %>
-    </div>
-  <% else %>
-    <div>
+<%= turbo_frame_tag "order_form" do %>
+
+  <%= form_with model: @order, url: update_summary_orders_path, method: :post, id: "order-form", data: { turbo_frame: "tax_summary" } do |form| %>
+    <% if user_signed_in? && @addresses.any? %>
+      <div>
+        <label>Select address:</label>
+        <%= form.collection_select :address_id, @addresses, :id, :full_address, prompt: "Select your address" %>
+      </div>
+    <% else %>
+      <div>
       <label>Name:</label>
       <%= form.text_field :name %>
     </div>
@@ -29,11 +31,20 @@
     </div>
     <div>
       <label>Province:</label>
-      <%= form.collection_select :province_id, Province.all, :id, :name, prompt: "Select your province" %>
+      <%= turbo_frame_tag "province_selection", target: "_top" do %>
+        <%= form_with model: @order, url: update_summary_orders_path, method: :post, id: "order-form", data: { turbo_frame: "tax_summary" } do |form| %>
+          <%= form.select :province_id, Province.all.collect { |p| [p.name, p.id] }, { prompt: 'Select your province' }, { onchange: 'this.form.requestSubmit()' } %>
+        <% end %>
+      <% end %>
     </div>
-  <% end %>
+    <% end %>
 
-  <%= form.submit "Submit Order" %>
+    <%= form.submit "Place Order" %>
+  <% end %>
 <% end %>
+
+  <%= turbo_frame_tag "tax_summary" do %>
+    <%= render partial: "orders/order_summary", locals: { taxes: @taxes, total_with_taxes: @total_with_taxes } %>
+  <% end %>
 </div>
 <%= render 'layouts/footer' %>

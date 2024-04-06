@@ -21,4 +21,8 @@ Rails.application.routes.draw do
   get '/search', to: 'search#index'
 
   resources :orders, only: [:new, :create, :show]
+  resources :orders do
+    post :update_summary, on: :collection
+  end
+
 end

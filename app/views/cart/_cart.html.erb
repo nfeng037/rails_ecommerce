@@ -1,20 +1,20 @@
 <%= turbo_frame_tag "cart" do%>
 <div class="w-[85%] mx-auto min-h-[50vh]">
 
-    <% if @cart.cartItems.count > 0 %>
+    <% if @cart.cart_items.count > 0 %>
       <h1 class="mt-24 font-bold text-2xl">
         Cart
-        <% if  @cart.cartItems.sum(&:quantity) == 1 %>
-          <span class="font-normal">(<%= @cart.cartItems.sum(&:quantity) %> item)</span>
+        <% if  @cart.cart_items.sum(&:quantity) == 1 %>
+          <span class="font-normal">(<%= @cart.cart_items.sum(&:quantity) %> item)</span>
         <% else %>
-          <span class="font-normal">(<%= @cart.cartItems.sum(&:quantity) %> items)</span>
+          <span class="font-normal">(<%= @cart.cart_items.sum(&:quantity) %> items)</span>
         <% end %>
       </h1>
       <div class="grid lg:grid-cols-3 gap-12 p-6">
 
         <div class="lg:col-span-2 bg-white divide-y">
-          <% @cart.cartItems.each do |cartItem| %>
-          <% product = cartItem.product %>
+          <% @cart.cart_items.each do |cart_item| %>
+          <% product = cart_item.product %>
             <div class="grid md:grid-cols-4 items-center gap-8 py-6" id="<%=
             "cart-#{product.id}" %>">
               <div class="md:col-span-2 flex items-center gap-6" >
@@ -41,14 +41,14 @@
               </div>
               <div class="flex">
                 <%= form_with(url: cart_decrease_path, method: :post) do |f| %>
-                  <%=f.hidden_field :id, value: cartItem.id %>
+                  <%=f.hidden_field :id, value: cart_item.id %>
                   <%= f.submit "-",class:"cursor-pointer shrink-0 py-2 font-semibold text-[#333] text-2xl hover:text-black/[0.7]"%>
                 <% end %>
 
                 <span
                   class="bg-transparent mx-4 px-4 py-2 font-semibold text-[#333] text-md shadow-[0_0px_4px_0px_rgba(6,81,237,0.2)]"
                 >
-                  <%= cartItem.quantity %>
+                  <%= cart_item.quantity %>
                 </span>
 
                 <%= form_with(url: cart_add_path) do |f|%> <%= f.hidden_field :id,
@@ -58,11 +58,11 @@
               </div>
               <div class="flex items-center">
                 <h4 class="text-lg font-bold text-[#333] mr-auto">
-                  <%= number_to_currency(cartItem.total, unit: '$', percision: 2) %>
+                  <%= number_to_currency(cart_item.total, unit: '$', percision: 2) %>
                 </h4>
                 <%= form_with(url: cart_remove_path) do |f|%>
-                  <%= f.hidden_field :id,value: cartItem.id %>
-                  <%= f.hidden_field :quantity, value:cartItem.quantity %>
+                  <%= f.hidden_field :id,value: cart_item.id %>
+                  <%= f.hidden_field :quantity, value:cart_item.quantity %>
                   <%= f.submit "X", class:"cursor-pointer shrink-0 text-[#333] font-semibold hover:text-red-500" %>
                 <% end %>
               </div>

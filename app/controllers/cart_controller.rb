@@ -1,19 +1,20 @@
 class CartController < ApplicationController
   def show
     @render_cart = false
+    @cart = current_cart
   end
 
   def add
     @product = Product.find_by(id: params[:id])
     quantity = params[:quantity].to_i
 
-    current_cartItem= @cart.cartItems.find_by(product_id: @product.id)
+    current_cart_item= @cart.cart_items.find_by(product_id: @product.id)
 
-    if current_cartItem
-      new_quantity = current_cartItem.quantity + quantity
-      update_success = current_cartItem.update(quantity: new_quantity)
+    if current_cart_item
+      new_quantity = current_cart_item.quantity + quantity
+      update_success = current_cart_item.update(quantity: new_quantity)
     else
-      @cart.cartItems.create(product: @product, quantity: quantity)
+      @cart.cart_items.create(product: @product, quantity: quantity)
     end
 
     respond_to do |format|
