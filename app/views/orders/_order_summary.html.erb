@@ -1,15 +1,57 @@
-
 <% if @cart && @cart.cart_items.any? %>
-  <p>Subtotal: <%= number_to_currency(@cart.total) %></p>
-  <% @cart.cart_items.each do |cart_item| %>
-    <%= cart_item.product.name %>
-    <%= cart_item.quantity %>
-  <% end %>
-  <p>GST: <%= number_to_currency(@taxes[:gst]) %></p>
-  <p>PST: <%= number_to_currency(@taxes[:pst]) %></p>
-  <p>HST: <%= number_to_currency(@taxes[:hst]) %></p>
-  <p>Total: <%= number_to_currency(@total_with_taxes) %></p>
-
+  <div class="space-y-4">
+    <% @cart.cart_items.each do |cart_item| %>
+      <div class="relative flex justify-between items-center pb-2">
+        <div class="flex col-span-3 items-center">
+          <%= image_tag cart_item.product.image, alt: cart_item.product.name, class: "w-16 h-16 object-contain rounded-md border-[#B68256]/[0.5] border" %>
+          <div class="absolute top-0 left-12 bg-black bg-opacity-50 rounded-full w-6 h-6 flex items-center justify-center text-white text-xs">
+            <%= cart_item.quantity %>
+          </div>
+          <p class="m-4"><%= cart_item.product.name %></p>
+        </div>
+          <% if cart_item.product.active %>
+            <p class="font-semibold">
+              <%= number_to_currency(cart_item.product.price * 0.85 * cart_item.quantity, unit: "$", precision: 2) %>
+            </p>
+          <% else %>
+            <p class="font-semibold">
+              <%= number_to_currency(cart_item.product.price * cart_item.quantity, unit: "$", precision: 2) %>
+            </p>
+          <% end %>
+        </div>
+    <% end %>
+    <div class="pt-4 border-t border-[#B68256]/[0.5]">
+      <p class="flex justify-between">
+        <span>Subtotal:</span>
+        <span><%= number_to_currency(@cart.total) %></span>
+      </p>
+      <% if @taxes[:gst].zero? && @taxes[:pst].zero? && @taxes[:hst].zero? %>
+        <p class="text-left my-4">Please fill in your address to see the correct tax charges for your order.</p>
+      <% end %>
+      <% if @taxes[:gst].nonzero? %>
+        <p class="flex justify-between">
+          <span>GST:</span>
+          <span><%= number_to_currency(@taxes[:gst]) %></span>
+        </p>
+      <% end %>
+      <% if @taxes[:pst].nonzero? %>
+        <p class="flex justify-between">
+          <span>PST:</span>
+          <span><%= number_to_currency(@taxes[:pst]) %></span>
+        </p>
+      <% end %>
+      <% if @taxes[:hst].nonzero? %>
+        <p class="flex justify-between">
+          <span>HST:</span>
+          <span><%= number_to_currency(@taxes[:hst]) %></span>
+        </p>
+      <% end %>
+      <p class="flex justify-between text-lg font-bold">
+        <span>Total:</span>
+        <span><%= number_to_currency(@total_with_taxes) %></span>
+      </p>
+    </div>
+  </div>
 <% else %>
-  <p>Please add items to your cart.</p>
+  <p class="text-center">Please add items to your cart.</p>
 <% end %>

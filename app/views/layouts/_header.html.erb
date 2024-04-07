@@ -4,7 +4,15 @@
       <%= image_tag 'Glamour.png', alt: "LOGO", class: "w-36 lg:absolute max-lg:top-4 max-lg:left-10 max-sm:left-4 lg:top-2/4 lg:left-2/4 lg:-translate-x-1/2 lg:-translate-y-1/2" %>
     <% end %>
     <div class="flex items-center ml-auto lg:order-1">
-        <button class="bg-[#E6CDBA] rounded px-3 py-2 mr-6">LOGIN</button>
+        <div class="px-3 py-2">
+          <% if user_signed_in? %>
+            <%= link_to 'Edit Profile', edit_user_registration_path, class:"m-2" %>
+            <%= link_to 'Sign out', destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "bg-[#E6CDBA] px-3 py-2 rounded" %>
+          <% else %>
+            <%= link_to 'Sign In', new_user_session_path %>
+            <%= link_to 'Sign Up', new_user_registration_path, class: "bg-[#E6CDBA] px-3 py-2 rounded" %>
+          <% end %>
+        </div>
         <%= link_to 'CART', cart_path%>
         <%= turbo_frame_tag "cart_quantity" do %>
           <% if @cart.cart_items.sum(&:quantity) > 0 %>

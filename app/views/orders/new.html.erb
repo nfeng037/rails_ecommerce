@@ -1,41 +1,49 @@
 <%= render 'layouts/header' %>
-<div class="mt-24 w-[80%] mx-auto flex">
-  <div>
+<div class="mt-[60px] w-[80%] mx-auto flex flex-col lg:flex-row">
+  <!-- Order Form Section -->
+  <div class="lg:w-1/2 flex flex-col space-y-4 py-10">
     <%= turbo_frame_tag "order_form" do %>
-      <%= form_with model: @order, local: true do |form| %>
+      <%= form_with model: @order, local: true, class: "space-y-4" do |form| %>
         <% if user_signed_in? && @addresses.any? %>
           <div>
-            <label>Select address:</label>
-            <%= form.collection_select :address_id, @addresses, :id, :full_address, prompt: "Select your address" %>
+            <label class="block text-sm font-medium text-gray-700">Select address:</label>
+            <%= form.collection_select :address_id, @addresses, :id, :full_address, { prompt: "Select your address" }, { class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-[#B68256] focus:ring focus:ring-[#EFE3D9] focus:ring-opacity-50" } %>
           </div>
         <% else %>
+          <!-- Name Field -->
           <div>
-            <label>Name:</label>
-            <%= form.text_field :name %>
+            <label class="block text-sm font-medium text-gray-700">Name:</label>
+            <%= form.text_field :name, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-[#B68256] focus:ring focus:ring-[#EFE3D9] focus:ring-opacity-50" %>
           </div>
+          <!-- Phone Number Field -->
           <div>
-            <label>Phone Number:</label>
-            <%= form.text_field :phone_number %>
+            <label class="block text-sm font-medium text-gray-700">Phone Number:</label>
+            <%= form.text_field :phone_number, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-[#B68256] focus:ring focus:ring-[#EFE3D9] focus:ring-opacity-50" %>
           </div>
+          <!-- Address Fields -->
           <div>
-            <label>Address:</label>
-            <%= form.text_field :address %>
+            <label class="block text-sm font-medium text-gray-700">Address:</label>
+            <%= form.text_field :address, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-[#B68256] focus:ring focus:ring-[#EFE3D9] focus:ring-opacity-50" %>
           </div>
-          <div>
-            <label>City:</label>
-            <%= form.text_field :city %>
+          <div class="flex space-x-4">
+            <div class="flex-1">
+              <label class="block text-sm font-medium text-gray-700">City:</label>
+              <%= form.text_field :city, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-[#B68256] focus:ring focus:ring-[#EFE3D9] focus:ring-opacity-50" %>
+            </div>
+            <div class="flex-1">
+              <label class="block text-sm font-medium text-gray-700">Postal Code:</label>
+              <%= form.text_field :postal_code, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-[#B68256] focus:ring focus:ring-[#EFE3D9] focus:ring-opacity-50" %>
+            </div>
           </div>
+          <!-- Province Select -->
           <div>
-            <label>Postal Code:</label>
-            <%= form.text_field :postal_code %>
-          </div>
-          <div>
-            <label>Province:</label>
-            <%= form.select :province_id, Province.all.collect { |p| [p.name, p.id] }, { prompt: 'Select your province' } %>
+            <label class="block text-sm font-medium text-gray-700">Province:</label>
+            <%= form.select :province_id, Province.all.collect { |p| [p.name, p.id] }, { prompt: 'Select your province' }, { class: "block w-full border border-gray-300 rounded-md shadow-sm focus:border-[#B68256] focus:ring focus:ring-[#EFE3D9] focus:ring-opacity-50" } %>
           </div>
         <% end %>
-
-        <%= form.submit "Place Order" %>
+        <div class="mt-6 text-lg px-6 py-2.5 w-full bg-[#CDAC90] hover:bg-[#B68256] text-white rounded ">
+          <%= form.submit "Place Order", class:"flex justify-center w-full" %>
+        </div>
       <% end %>
     <% end %>
 
@@ -46,11 +54,12 @@
     <% end %>
   </div>
 
-  <div>
+  <div class="lg:w-1/2 lg:pl-4  p-10 ml-10 bg-[#F9F6F0]  overflow-auto overscroll-contain">
     <%= turbo_frame_tag "tax_summary" do %>
-      <%= render partial: "orders/order_summary", locals: { taxes: @taxes, total_with_taxes: @total_with_taxes } %>
+      <%= render partial: "orders/order_summary", locals: { taxes: @taxes, total_with_taxes: @total_with_taxes }, class: "border-t pt-4 mt-4 border-gray-300" %>
     <% end %>
   </div>
+
 </div>
 
 <%= render 'layouts/footer' %>

@@ -88,14 +88,6 @@
               </span>
             </li>
 
-            <li class="flex flex-wrap gap-4 text-md py-4 font-bold">
-              Total
-              <span class="ml-auto">
-                <%=number_to_currency( @cart.total * 0.12 + @cart.total, unit: "$",
-                precision: 2) %>
-              </span>
-            </li>
-
             <li class="text-black/[0.3] pt-2">
               Applicable taxes will be calculated at checkout.
             </li>
