@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users
   root 'products#index'
 
   get 'cart', to: 'cart#show'
@@ -25,4 +24,7 @@ Rails.application.routes.draw do
       post :update_summary
     end
   end
+
+  devise_for :users, controllers: { sessions: 'users/sessions' }
+
 end

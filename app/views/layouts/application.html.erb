@@ -13,7 +13,24 @@
 
   <body>
     <main class="relative">
-      <%= yield %>
+
+      <% flash.each do |key, value| %>
+        <div class="flash <%= key %> mt-24 text-center"><%= value %></div>
+      <% end %>
+
+    <%= yield %>
     </main>
+    <script>
+      document.addEventListener("turbo:load", function() {
+        var flashes = document.querySelectorAll('.flash');
+        setTimeout(function() {
+          flashes.forEach(function(flash) {
+            flash.style.display = 'none';
+          });
+        }, 3000);
+      });
+    </script>
   </body>
+
+
 </html>
