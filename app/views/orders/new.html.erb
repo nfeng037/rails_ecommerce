@@ -10,13 +10,13 @@
             <p>
               <%= @address.name %>,<br>
               <%= @address.phone_number %>,<br>
-              <%= @address.adress_line %>,<br>
+              <%= @address.address_line %>,<br>
               <%= @address.city %>,<br>
               <%= @address.province.name %>,<br>
               <%= @address.postal_code %>
             </p>
             <%= form.hidden_field :name, value: @address.name %>
-            <%= form.hidden_field :address, value: @address.adress_line %>
+            <%= form.hidden_field :address, value: @address.address_line %>
             <%= form.hidden_field :city, value: @address.city %>
             <%= form.hidden_field :postal_code, value: @address.postal_code %>
             <%= form.hidden_field :province_id, value: @address.province_id %>

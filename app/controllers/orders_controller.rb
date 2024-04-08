@@ -60,7 +60,7 @@ class OrdersController < ApplicationController
 
   def set_order_details_from_address(address)
     @order.name = address.name
-    @order.address = address.adress_line
+    @order.address = address.address_line
     @order.city = address.city
     @order.postal_code = address.postal_code
     @order.phone_number = address.phone_number

@@ -43,11 +43,11 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [
       :email, :password, :password_confirmation,
-      { address_attributes: [:phone_number, :name, :province_id, :adress_line, :city, :postal_code] }
+      { address_attributes: [:phone_number, :name, :province_id, :address_line, :city, :postal_code] }
     ])
     devise_parameter_sanitizer.permit(:account_update, keys: [
       :email, :password, :password_confirmation, :current_password,
-      { address_attributes: [:id, :name, :phone_number, :adress_line, :city, :province_id, :postal_code] }
+      { address_attributes: [:id, :name, :phone_number, :address_line, :city, :province_id, :postal_code] }
     ])
   end
 end
