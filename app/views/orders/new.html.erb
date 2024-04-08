@@ -5,23 +5,44 @@
     <%= turbo_frame_tag "order_form" do %>
       <%= form_with model: @order, local: true, class: "space-y-4" do |form| %>
         <% if user_signed_in? && @address.present? %>
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Address:</label>
-            <p>
-              <%= @address.name %>,<br>
-              <%= @address.phone_number %>,<br>
-              <%= @address.address_line %>,<br>
-              <%= @address.city %>,<br>
-              <%= @address.province.name %>,<br>
-              <%= @address.postal_code %>
-            </p>
-            <%= form.hidden_field :name, value: @address.name %>
-            <%= form.hidden_field :address, value: @address.address_line %>
-            <%= form.hidden_field :city, value: @address.city %>
-            <%= form.hidden_field :postal_code, value: @address.postal_code %>
-            <%= form.hidden_field :province_id, value: @address.province_id %>
-            <%= form.hidden_field :phone_number, value: @address.phone_number %>
-            <%= hidden_field_tag :user_province_id, @address.province_id, id: "user_province_id" %>
+          <div class="grid grid-cols-2 gap-4">
+            <!-- Name Field -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Name:</label>
+              <p><%= @address.name %></p>
+              <%= form.hidden_field :name, value: @address.name %>
+            </div>
+            <!-- Phone Number Field -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Phone Number:</label>
+              <p><%= @address.phone_number %></p>
+              <%= form.hidden_field :phone_number, value: @address.phone_number %>
+            </div>
+            <!-- Address Fields -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Address:</label>
+              <p><%= @address.address_line %></p>
+              <%= form.hidden_field :address, value: @address.address_line %>
+            </div>
+            <!-- City Fields -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700">City:</label>
+              <p><%= @address.city %></p>
+              <%= form.hidden_field :city, value: @address.city %>
+            </div>
+            <!-- Province Fields -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Province:</label>
+              <p><%= @address.province.name %></p>
+              <%= hidden_field_tag :user_province_id, @address.province_id, id: "user_province_id" %>
+            </div>
+            <!-- Postal Code Fields -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Postal Code:</label>
+              <p><%= @address.postal_code %></p>
+              <%= form.hidden_field :postal_code, value: @address.postal_code %>
+            </div>
+            <%= link_to 'Edit Profile', edit_user_registration_path, class:"m-2" %>
           </div>
         <% else %>
           <!-- Name Field -->
