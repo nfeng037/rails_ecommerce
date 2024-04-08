@@ -4,10 +4,24 @@
   <div class="lg:w-1/2 flex flex-col space-y-4 py-10">
     <%= turbo_frame_tag "order_form" do %>
       <%= form_with model: @order, local: true, class: "space-y-4" do |form| %>
-        <% if user_signed_in? && @addresses.any? %>
+        <% if user_signed_in? && @address.present? %>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Select address:</label>
-            <%= form.collection_select :address_id, @addresses, :id, :full_address, { prompt: "Select your address" }, { class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-[#B68256] focus:ring focus:ring-[#EFE3D9] focus:ring-opacity-50" } %>
+            <label class="block text-sm font-medium text-gray-700">Address:</label>
+            <p>
+              <%= @address.name %>,<br>
+              <%= @address.phone_number %>,<br>
+              <%= @address.adress_line %>,<br>
+              <%= @address.city %>,<br>
+              <%= @address.province.name %>,<br>
+              <%= @address.postal_code %>
+            </p>
+            <%= form.hidden_field :name, value: @address.name %>
+            <%= form.hidden_field :address, value: @address.adress_line %>
+            <%= form.hidden_field :city, value: @address.city %>
+            <%= form.hidden_field :postal_code, value: @address.postal_code %>
+            <%= form.hidden_field :province_id, value: @address.province_id %>
+            <%= form.hidden_field :phone_number, value: @address.phone_number %>
+            <%= hidden_field_tag :user_province_id, @address.province_id, id: "user_province_id" %>
           </div>
         <% else %>
           <!-- Name Field -->
@@ -68,6 +82,12 @@
 document.addEventListener("turbo:load", () => {
   const provinceSelect = document.querySelector("#order_province_id");
   const hiddenProvinceInput = document.querySelector("#hidden_province_id");
+  const userProvinceInput = document.querySelector("#user_province_id");
+
+  if (userProvinceInput && userProvinceInput.value) {
+    hiddenProvinceInput.value = userProvinceInput.value;
+    document.getElementById("province-selection-form").requestSubmit();
+  }
 
   if (provinceSelect && hiddenProvinceInput) {
     provinceSelect.addEventListener("change", () => {
