@@ -61,7 +61,7 @@
       <%= form_with url:products_path, method: :get, class: "w-full text-grey-800 transition focus:outline-none focus:border-transparent p-2 appearance-none leading-normal text-xl lg:text-2xl" do |form|%>
         <%= form.text_field :search, placeholder: "Search products...", class: "rounded" %>
         <%= form.collection_select :category_id, Category.all, :id, :name, include_blank: "All Categories", class: "rounded" %>
-        <%= form.submit "Search", class: "bg-[#a6c1ee] text-white px-3 py-2 rounded hover:bg-[#87acec]" %>
+        <%= form.submit "Search", class: "bg-[#cdac90] text-white px-3 py-1 rounded hover:bg-[#b68256] mt-2" %>
       <% end %>
     </div>
   </div>

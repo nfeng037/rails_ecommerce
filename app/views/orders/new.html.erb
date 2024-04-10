@@ -1,7 +1,8 @@
 <%= render 'layouts/header' %>
-<div class="mt-[60px] w-[80%] mx-auto flex flex-col lg:flex-row h-[70vh]">
+<div class="mt-[60px] w-[80%] mx-auto flex flex-col lg:flex-row min-h-[70vh]">
   <!-- Order Form Section -->
-  <div class="lg:w-1/2 flex flex-col space-y-4 py-10">
+  <div class="lg:w-1/2 flex flex-col space-y-4 py-12 mt-4">
+    <h1 class="text-left text-xl font-bold">Address</h1>
     <%= turbo_frame_tag "order_form" do %>
       <%= form_with model: @order, local: true, data: { turbo: false }, class: "space-y-4" do |form| %>
         <% if user_signed_in? && @address.present? %>
@@ -42,7 +43,7 @@
               <p><%= @address.postal_code %></p>
               <%= form.hidden_field :postal_code, value: @address.postal_code %>
             </div>
-            <%= link_to 'Edit Profile', edit_user_registration_path, class:"m-2" %>
+            <%= link_to 'Edit Profile', edit_user_registration_path, class:"underline text-[#B68256] hover:text-[#EFE3D9]" %>
           </div>
         <% else %>
           <!-- Name Field -->
@@ -89,7 +90,7 @@
     <% end %>
   </div>
 
-  <div class="lg:w-1/2 lg:pl-4  p-10 ml-10 bg-[#F9F6F0]  overflow-auto overscroll-contain">
+  <div class="lg:w-1/2 lg:pl-4 p-10 md:ml-10 bg-[#F9F6F0]  overflow-auto overscroll-contain">
     <%= turbo_frame_tag "tax_summary" do %>
       <%= render partial: "orders/order_summary", locals: { taxes: @taxes, total_with_taxes: @total_with_taxes }, class: "border-t pt-4 mt-4 border-gray-300" %>
     <% end %>

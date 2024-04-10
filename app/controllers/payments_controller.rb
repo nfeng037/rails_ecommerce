@@ -25,9 +25,10 @@ class PaymentsController < ApplicationController
       redirect_to payments_success_path(order_id: @order.id), notice: "Payment was initiated successfully."
     rescue Stripe::StripeError => e
       payment.update(status: :failed) if payment
-      redirect_to payments_new_path(order_id: @order.id), alert: e.message
+      redirect_to payment_path(@order), alert: e.message
     end
   end
+
 
 
   def cancel

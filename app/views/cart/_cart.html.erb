@@ -1,8 +1,8 @@
 <%= turbo_frame_tag "cart" do%>
-<div class="w-[85%] mx-auto h-[65vh]">
+<div class="w-[85%] mx-auto min-h-[65vh] mt-24">
 
     <% if @cart.cart_items.count > 0 %>
-      <h1 class="mt-24 font-bold text-2xl">
+      <h1 class="font-bold text-2xl pt-10">
         Cart
         <% if  @cart.cart_items.sum(&:quantity) == 1 %>
           <span class="font-normal">(<%= @cart.cart_items.sum(&:quantity) %> item)</span>
