@@ -1,0 +1,58 @@
+<h1>Payment Processor</h1>
+<form id="payment-form" action="/payments" method="post">
+  <input type="hidden" name="order_id" value="<%= params[:order_id] %>">
+  <div id="card-element">
+    <!-- Stripe Elements -->
+  </div>
+  <div id="card-errors" role="alert"></div>
+  <button type="submit" id="submit-button">Submit Payment</button>
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var stripe = Stripe('pk_test_51P1hSWHPbbqvlXcn4ARNis4STeDV3Wq3a0hLD4piwcRQLQNLZpnC6Hqjwt3oHgH7gFE3RXrD4IOCQx1KcMnnkpMy00mywx5l5r');
+  var elements = stripe.elements();
+  var card = elements.create('card');
+  card.mount('#card-element');
+
+  card.addEventListener('change', function(event) {
+    var displayError = document.getElementById('card-errors');
+    if (event.error) {
+      displayError.textContent = event.error.message;
+    } else {
+      displayError.textContent = '';
+    }
+  });
+
+  var form = document.getElementById('payment-form');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    stripe.createToken(card).then(function(result) {
+      if (result.error) {
+        var errorElement = document.getElementById('card-errors');
+        errorElement.textContent = result.error.message;
+      } else {
+        stripeTokenHandler(result.token);
+      }
+    });
+  });
+});
+
+function stripeTokenHandler(token) {
+  var form = document.getElementById('payment-form');
+  var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  var hiddenInput = document.createElement('input');
+  hiddenInput.setAttribute('type', 'hidden');
+  hiddenInput.setAttribute('name', 'stripeToken');
+  hiddenInput.setAttribute('value', token.id);
+  form.appendChild(hiddenInput);
+
+  var csrfHiddenInput = document.createElement('input');
+  csrfHiddenInput.setAttribute('type', 'hidden');
+  csrfHiddenInput.setAttribute('name', 'authenticity_token');
+  csrfHiddenInput.setAttribute('value', csrfToken);
+  form.appendChild(csrfHiddenInput);
+
+  form.submit();
+}
+</script>

@@ -1,0 +1,13 @@
+<h1>Payment Successful</h1>
+
+<p>Your payment has been processed successfully.</p>
+
+<% if @order %>
+  <h2>Order Summary</h2>
+  <p>Order ID: <%= @order.id %></p>
+  <p>Status: <%= @order.status.capitalize %></p>
+
+  <%= link_to 'Return to Home', root_path, class: 'btn btn-primary' %>
+<% else %>
+  <p>Order details are not available.</p>
+<% end %>

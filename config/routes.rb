@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   get 'static_pages/index'
   get 'pages/:identifier', to: 'static_pages#show', as: :static_page
 
-
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -24,6 +23,14 @@ Rails.application.routes.draw do
       post :update_summary
     end
   end
+
+  get 'payments/new'
+  post '/payments', to: 'payments#create'
+  get 'payments/success', to: 'payments#success'
+  get 'payments/cancel', to: 'payments#cancel'
+
+
+  get'billing', to: 'billing#show'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',

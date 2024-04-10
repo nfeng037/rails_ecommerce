@@ -9,17 +9,16 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= turbo_include_tags %>
+    <script src="https://js.stripe.com/v3/"></script>
   </head>
 
   <body>
-    <main class="relative">
 
       <% flash.each do |key, value| %>
         <div class="flash <%= key %> mt-24 text-center"><%= value %></div>
       <% end %>
 
     <%= yield %>
-    </main>
     <script>
       document.addEventListener("turbo:load", function() {
         var flashes = document.querySelectorAll('.flash');
