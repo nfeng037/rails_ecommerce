@@ -21,9 +21,10 @@ class OrdersController < ApplicationController
     end
 
     set_taxes(@order.province_id) if @order.province_id.present?
+    @order.total_with_taxes = @total_with_taxes
 
     if @order.save
-      redirect_to payment_order_path(@order), notice: 'Order was successfully created.'
+      redirect_to payments_new_path(order_id: @order.id), notice: 'Order was successfully created.'
     else
       render :new
     end

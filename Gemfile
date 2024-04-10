@@ -84,3 +84,5 @@ gem "faraday_middleware", "1.2.0"
 gem 'kaminari','1.2.2'
 
 gem "tailwindcss-rails", "~> 2.3"
+
+gem 'stripe'

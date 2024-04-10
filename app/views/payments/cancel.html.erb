@@ -1,0 +1,6 @@
+<h1>Payment Cancelled</h1>
+
+<p>Your payment was not completed. If this was an error, please try again.</p>
+
+<%= link_to 'Try Again', payments_new_path(order_id: @order&.id), class: 'btn btn-warning' %>
+<%= link_to 'Return to Home', root_path, class: 'btn btn-primary' %>
