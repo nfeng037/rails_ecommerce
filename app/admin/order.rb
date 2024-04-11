@@ -1,29 +1,5 @@
 ActiveAdmin.register Order do
-  permit_params :name, :address, :city, :postal_code, :phone_number, :province_id, :status, :payment_intent_id, :total_with_taxes, :taxes, :user_id, :is_guest
-
-  index do
-    selectable_column
-    id_column
-    column :name
-    column :address
-    column :city
-    column :postal_code
-    column :phone_number
-    column :total_with_taxes
-    column :taxes
-    column :created_at
-    column :status do |order|
-      order.status
-    end
-    actions
-  end
-
-  filter :name
-  filter :address
-  filter :city
-  filter :postal_code
-  filter :status
-  filter :created_at
+  permit_params :name, :address, :city, :postal_code, :phone_number, :province_id, :total_with_taxes, :status, order_items_attributes: [:id, :product_id, :quantity, :price, :_destroy]
 
   show do
     attributes_table do
@@ -32,51 +8,47 @@ ActiveAdmin.register Order do
       row :city
       row :postal_code
       row :phone_number
-      row :province_id
-      row :user_id
-      row :is_guest
-      row :status do |order|
-        order.status
+      row :province
+      row :total_with_taxes do |order|
+        number_to_currency order.total_with_taxes
       end
-      row :payment_intent_id
-      row :total_with_taxes
-      row :taxes
-      row :created_at
-      row :updated_at
+      row :status
     end
 
-    panel "Cart Items" do
-      table_for order.cart.cart_items do
+    panel "Order Items" do
+      table_for order.order_items do
         column "Product" do |item|
           item.product.name
         end
-        column :quantity
+        column "Quantity", :quantity
         column "Price" do |item|
-          number_to_currency(item.product.price)
+          number_to_currency item.price
         end
-        column "Total" do |item|
-          number_to_currency(item.quantity * item.product.price)
+        column "Subtotal" do |item|
+          number_to_currency(item.quantity * item.price)
         end
       end
     end
+    active_admin_comments
   end
 
   form do |f|
-    f.inputs "Order Details" do
+    f.semantic_errors
+    f.inputs do
       f.input :name
       f.input :address
       f.input :city
       f.input :postal_code
       f.input :phone_number
-      f.input :province_id, as: :select, collection: Province.all.collect { |p| [p.name, p.id] }
-      f.input :user_id, as: :select, collection: User.all.collect { |u| [u.email, u.id] }
-      f.input :is_guest
-      f.input :status, as: :select, collection: Order.statuses.keys.map { |status| [status, status] }
-      f.input :payment_intent_id
+      f.input :province
       f.input :total_with_taxes
-      f.input :taxes
+      f.input :status, as: :select, collection: Order.statuses.keys
+    end
+    f.has_many :order_items, allow_destroy: true do |n_f|
+      n_f.input :product
+      n_f.input :quantity
+      n_f.input :price
     end
     f.actions
   end
-
 end

@@ -41,6 +41,14 @@ class OrdersController < ApplicationController
         session[:order_ids] << @order.id
       end
 
+      @cart.cart_items.each do |item|
+        @order.order_items.create!(
+          product_id: item.product_id,
+          quantity: item.quantity,
+          price: item.product.price
+        )
+      end
+
       redirect_to payments_new_path(order_id: @order.id), notice: 'Order was successfully created.'
     else
       render :new

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_11_031331) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_11_054135) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -101,6 +101,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_11_031331) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.decimal "price"
+    t.integer "order_id", null: false
+    t.integer "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -108,7 +119,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_11_031331) do
     t.string "city"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "cart_id", null: false
     t.integer "province_id", null: false
     t.integer "user_id"
     t.boolean "is_guest"
@@ -117,7 +127,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_11_031331) do
     t.string "payment_intent_id"
     t.decimal "total_with_taxes", precision: 10, scale: 2
     t.decimal "taxes", precision: 10, scale: 2
-    t.index ["cart_id"], name: "index_orders_on_cart_id"
     t.index ["province_id"], name: "index_orders_on_province_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -179,7 +188,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_11_031331) do
   add_foreign_key "addresses", "users"
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "products"
-  add_foreign_key "orders", "carts"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
   add_foreign_key "orders", "provinces"
   add_foreign_key "orders", "users"
   add_foreign_key "payments", "orders"

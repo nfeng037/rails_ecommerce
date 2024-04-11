@@ -11,4 +11,5 @@ class Product < ApplicationRecord
 
   has_many :cartItems
   has_many :carts, through: :cartItems
+  has_many :order_items
 end
