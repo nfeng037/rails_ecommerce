@@ -22,6 +22,13 @@ class PaymentsController < ApplicationController
       @order.update(payment_intent_id: @payment_intent.id)
       payment.update(status: :successful)
 
+      if @order.update(status: :paid)
+        Payment.create(order: @order, status: :successful, amount: @order.total_with_taxes, payment_date: Time.current)
+        @order.cart.cart_items.destroy_all
+      else
+        redirect_to payments_new_path(order_id: @order.id), alert: "Unable to update order status."
+      end
+
       redirect_to payments_success_path(order_id: @order.id), notice: "Payment was initiated successfully."
     rescue Stripe::StripeError => e
       payment.update(status: :failed) if payment
@@ -32,7 +39,7 @@ class PaymentsController < ApplicationController
 
 
   def cancel
-    redirect_to payments_cancel_path(order_id: @order.id), alert: "Payment was cancelled."
+    redirect_to new_order_path(order_id: @order.id), alert: "Payment was cancelled."
   end
 
   def success
