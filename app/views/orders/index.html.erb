@@ -1,0 +1,16 @@
+<h1>Past Orders</h1>
+
+<% @orders.each do |order| %>
+  <div class="order">
+    <h2>Order <%= order.id %> - <%= order.created_at.to_s(:short) %></h2>
+    <ul>
+      <% order.order_items.each do |item| %>
+        <li>
+          <%= item.product.name %> - <%= item.quantity %> x <%= number_to_currency(item.price) %>
+        </li>
+      <% end %>
+    </ul>
+    <p>Taxes: <%= number_to_currency(order.taxes) %></p>
+    <p>Grand Total: <%= number_to_currency(order.total) %></p>
+  </div>
+<% end %>
