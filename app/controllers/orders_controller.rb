@@ -1,6 +1,15 @@
 class OrdersController < ApplicationController
   before_action :set_cart, only: [:new, :create, :update_summary]
 
+  def index
+    if user_signed_in?
+      @orders = current_user.orders.includes(order_items: :product).order(created_at: :desc)
+    else
+      @orders = Order.where(id: session[:order_ids]).includes(order_items: :product).order(created_at: :desc)
+    end
+  end
+
+
   def new
     @order = Order.new
     set_default_taxes
@@ -20,10 +29,18 @@ class OrdersController < ApplicationController
       set_order_details_from_address(current_user.address)
     end
 
-    set_taxes(@order.province_id) if @order.province_id.present?
-    @order.total_with_taxes = @total_with_taxes
+    if @order.province_id.present?
+      set_taxes(@order.province_id)
+      @order.total_with_taxes = @total_with_taxes
+      @order.taxes = @taxes.values.sum
+    end
 
     if @order.save
+      unless user_signed_in?
+        session[:order_ids] ||= []
+        session[:order_ids] << @order.id
+      end
+
       redirect_to payments_new_path(order_id: @order.id), notice: 'Order was successfully created.'
     else
       render :new
@@ -56,7 +73,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:name, :address, :city, :postal_code, :phone_number, :province_id)
+    params.require(:order).permit(:name, :address, :city, :postal_code, :phone_number, :province_id, :total_with_taxes, :taxes)
   end
 
   def set_order_details_from_address(address)

@@ -6,4 +6,8 @@ class Cart < ApplicationRecord
   def total
     cart_items.to_a.sum { |cart_item| cart_item.total }
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "id", "id_value", "updated_at"]
+  end
 end
