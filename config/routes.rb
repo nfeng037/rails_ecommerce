@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   get 'payments/new'
   post '/payments', to: 'payments#create'
   get 'payments/success', to: 'payments#success'
-  get 'payments/cancel', to: 'payments#cancel'
+  get 'payments/cancel', to: 'payments#cancel', as: :payments_cancel
 
 
   get'billing', to: 'billing#show'

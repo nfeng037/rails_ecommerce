@@ -36,19 +36,23 @@ class PaymentsController < ApplicationController
     end
   end
 
-
-
   def cancel
-    redirect_to new_order_path(order_id: @order.id), alert: "Payment was cancelled."
+    @order.update(status: :cancelled) if @order
+    redirect_to new_order_path, alert: "Payment was cancelled."
   end
 
   def success
+    @cart = Cart.find(session[:cart_id])
     if @order.update(status: :paid)
       Payment.create(
         order: @order,
         status: :successful,
         amount: @order.total_with_taxes,
         payment_date: Time.current)
+
+        @cart.cart_items.destroy_all
+        new_cart = Cart.create
+        session[:cart_id] = new_cart.id
     else
       redirect_to payments_new_path(order_id: @order.id), alert: "Unable to update order status."
     end
