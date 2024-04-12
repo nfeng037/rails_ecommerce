@@ -9,7 +9,6 @@ class OrdersController < ApplicationController
     end
   end
 
-
   def new
     @order = Order.new
     set_default_taxes
@@ -17,9 +16,7 @@ class OrdersController < ApplicationController
     Rails.logger.debug "Address: #{@address.inspect}"
   end
 
-
   def create
-    Rails.logger.debug "Submitted params: #{params.inspect}"
     @order = Order.new(order_params)
     @order.user = current_user if user_signed_in?
     @order.is_guest = !user_signed_in?
@@ -30,15 +27,16 @@ class OrdersController < ApplicationController
 
     if @order.province_id.present?
       set_taxes(@order.province_id)
-      @order.total_with_taxes = @total_with_taxes
-      @order.taxes = @taxes.values.sum
+    else
+      set_default_taxes
     end
 
+    @order.total_with_taxes = @total_with_taxes
+    @order.taxes = @taxes.values.sum
+
     if @order.save
-      unless user_signed_in?
-        session[:order_ids] ||= []
-        session[:order_ids] << @order.id
-      end
+      session[:order_ids] ||= []
+      session[:order_ids] << @order.id if !user_signed_in?
 
       @cart.cart_items.each do |item|
         price = item.product.active ? item.product.price * 0.85 : item.product.price
@@ -51,16 +49,18 @@ class OrdersController < ApplicationController
 
       redirect_to payments_new_path(order_id: @order.id), notice: 'Order was successfully created.'
     else
+      flash.now[:alert] = 'Please ensure all fields are filled in correctly.'
       render :new
     end
   end
 
-
   def update_summary
     province_id = params[:order][:province_id]
-    set_taxes(province_id)
-    total_price = @cart.cart_items.inject(0) { |sum, item| sum + item.quantity * item.product.price }
-    total_with_taxes = total_price + @taxes.values.sum
+    if province_id.present?
+      set_taxes(province_id)
+    else
+      set_default_taxes
+    end
 
     respond_to do |format|
       format.turbo_stream do

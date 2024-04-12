@@ -4,27 +4,39 @@
       <%= image_tag 'Glamour.png', alt: "LOGO", class: "w-36 lg:absolute max-lg:top-4 max-lg:left-10 max-sm:left-4 lg:top-2/4 lg:left-2/4 lg:-translate-x-1/2 lg:-translate-y-1/2" %>
     <% end %>
     <div class="flex items-center ml-auto lg:order-1">
+        <button id="search-toggle" class="ml-6">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+          </svg>
+        </button>
+        <button id="toggle" class='lg:hidden'>
+          <svg class="w-7 h-7" fill="#333" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </button>
         <div class="px-3 py-2">
-        <% if user_signed_in? %>
-          <div class="relative" id="user-menu-container">
-            <button id="user-menu-button" class="block text-gray-700 hover:text-gray-900 focus:outline-none">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                <path fill-rule="evenodd" d="M8 16a5 5 0 0 1-5-5h10a5 5 0 0 1-5 5z"/>
-              </svg>
-            </button>
-            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden" id="user-menu-dropdown">
-              <a href="<%= edit_user_registration_path %>" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Edit Profile</a>
-              <a href="<%= orders_path %>" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Order History</a>
-              <%= link_to 'Sign out', destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "block px-4 py-2 text-gray-800 hover:bg-gray-100" %>
+          <% if user_signed_in? %>
+            <div class="relative" id="user-menu-container">
+              <button id="user-menu-button" class="block text-gray-700 hover:text-gray-900 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                </svg>
+              </button>
+              <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden" id="user-menu-dropdown">
+                <a href="<%= edit_user_registration_path %>" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Edit Profile</a>
+                <a href="<%= orders_path %>" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Order History</a>
+                <%= link_to 'Sign out', destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "block px-4 py-2 text-gray-800 hover:bg-gray-100" %>
+              </div>
             </div>
-          </div>
-        <% else %>
-          <%= link_to 'Sign In', new_user_session_path, class: "text-sm px-4 py-2 leading-none rounded text-[#b68256] hover:border-transparent hover:text-white hover:bg-[#b68256] mt-4 lg:mt-0" %>
-          <%= link_to 'Sign Up', new_user_registration_path, class: "text-sm px-4 py-2 leading-none border rounded text-[#b68256] border-[#b68256] hover:border-transparent hover:text-white hover:bg-[#b68256] mt-4 lg:mt-0" %>
-        <% end %>
+          <% else %>
+            <%= link_to 'Sign In', new_user_session_path, class: "text-sm px-4 py-2 leading-none rounded text-[#b68256] hover:border-transparent hover:text-white hover:bg-[#b68256] mt-4 lg:mt-0" %>
+            <%= link_to 'Sign Up', new_user_registration_path, class: "text-sm px-4 py-2 leading-none border rounded text-[#b68256] border-[#b68256] hover:border-transparent hover:text-white hover:bg-[#b68256] mt-4 lg:mt-0" %>
+          <% end %>
         </div>
-        <%= link_to 'CART', cart_path%>
+        <%= link_to 'CART', cart_path %>
         <%= turbo_frame_tag "cart_quantity" do %>
           <% if @cart.cart_items.sum(&:quantity) > 0 %>
             <span class="relative flex h-6 w-6 ">
@@ -37,18 +49,6 @@
             <span> (0) </span>
           <% end %>
         <% end %>
-        <button id="search-toggle" class="ml-6">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-          </svg>
-        </button>
-        <button id="toggle" class='lg:hidden ml-7'>
-          <svg class="w-7 h-7" fill="#333" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-              clip-rule="evenodd"></path>
-          </svg>
-        </button>
     </div>
     <ul id="menu" class="lg:!flex lg:space-x-5 max-lg:space-y-2 max-lg:hidden max-lg:py-4 max-lg:w-full">
       <li>
