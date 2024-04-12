@@ -23,7 +23,6 @@ class CartController < ApplicationController
                               turbo_stream.replace('cart_quantity', partial: 'cart/cart_quantity', locals: {cart: @cart})]
       end
     end
-
   end
 
   def decrease

@@ -1,15 +1,77 @@
 <%= render 'layouts/header' %>
-<div class="mt-24">
-<p>Subtotal: <%= number_to_currency(@order.cart.total) %></p>
-<% unless @taxes[:gst].zero? %>
-  <p>GST : <%= number_to_currency(@taxes[:gst]) %></p>
-<% end %>
-<% unless @taxes[:pst].zero? %>
-  <p>PST: <%= number_to_currency(@taxes[:pst]) %></p>
-<% end %>
-<% unless @taxes[:hst].zero? %>
-  <p>HST: <%= number_to_currency(@taxes[:hst]) %></p>
-<% end %>
-<p>Total: <%= number_to_currency(@total_with_taxes) %></p>
+
+<div class="overflow-hidden sm:rounded-lg my-6 mx-auto p-6 w-[80%] mt-24 min-h-[70vh]">
+  <!-- Order Heading -->
+  <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
+    <h3 class="text-lg leading-6 font-medium text-gray-900">
+      Order #<%= @order.id %>
+    </h3>
+    <p class="mt-1 max-w-2xl text-sm text-gray-500">
+      <%= @order.created_at.to_formatted_s(:long) %>
+    </p>
+  </div>
+
+  <!-- Order Content -->
+  <% @order.order_items.each do |item| %>
+    <div class="border-t border-gray-200">
+      <dl>
+        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 items-center">
+          <!-- Product Details -->
+          <dt class="text-sm font-medium text-gray-500 flex items-center sm:col-span-2">
+            <%= image_tag item.product.image, alt: item.product.name, class: "w-12 h-12 rounded mr-4" %>
+            <%= item.product.name %>
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0">
+            <%= item.quantity %> x <%= number_to_currency(item.price) %>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  <% end %>
+
+  <!-- Order Summary -->
+  <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+    <div class="sm:flex sm:items-center sm:justify-between">
+
+      <!-- Shipping Details -->
+      <div>
+        <dt class="text-sm font-medium text-gray-500">
+          Shipping address
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900">
+          <%= @order.address %>
+        </dd>
+      </div>
+
+      <!-- Tax and Total -->
+      <div class="sm:flex sm:items-center sm:space-x-4">
+        <div>
+          <dt class="text-sm font-medium text-gray-500">
+            Tax
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <%= number_to_currency(@order.taxes) %>
+          </dd>
+        </div>
+        <div>
+          <dt class="text-sm font-medium text-gray-500">
+            Total
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900">
+            <%= number_to_currency(@order.total_with_taxes) %>
+          </dd>
+        </div>
+      </div>
+
+      <!-- Back to Orders Link -->
+      <!-- Added a margin-top mt-4 on smaller screens, it will be on the same row on larger screens -->
+      <div class="mt-4 sm:mt-0 sm:ml-4">
+        <%= link_to 'Back to Orders', orders_path, class: "px-4 py-3 rounded-md bg-[#c19772] text-white hover:bg-[#ad7c54]" %>
+      </div>
+
+    </div>
+  </div>
+
 </div>
+
 <%= render 'layouts/footer' %>

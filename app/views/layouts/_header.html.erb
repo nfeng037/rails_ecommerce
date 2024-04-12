@@ -5,13 +5,24 @@
     <% end %>
     <div class="flex items-center ml-auto lg:order-1">
         <div class="px-3 py-2">
-          <% if user_signed_in? %>
-            <%= link_to 'Edit Profile', edit_user_registration_path, class:"m-2" %>
-            <%= link_to 'Sign out', destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "bg-[#E6CDBA] px-3 py-2 rounded" %>
-          <% else %>
-            <%= link_to 'Sign In', new_user_session_path %>
-            <%= link_to 'Sign Up', new_user_registration_path, class: "bg-[#E6CDBA] px-3 py-2 rounded" %>
-          <% end %>
+        <% if user_signed_in? %>
+          <div class="relative" id="user-menu-container">
+            <button id="user-menu-button" class="block text-gray-700 hover:text-gray-900 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                <path fill-rule="evenodd" d="M8 16a5 5 0 0 1-5-5h10a5 5 0 0 1-5 5z"/>
+              </svg>
+            </button>
+            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden" id="user-menu-dropdown">
+              <a href="<%= edit_user_registration_path %>" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Edit Profile</a>
+              <a href="<%= orders_path %>" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Order History</a>
+              <%= link_to 'Sign out', destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "block px-4 py-2 text-gray-800 hover:bg-gray-100" %>
+            </div>
+          </div>
+        <% else %>
+          <%= link_to 'Sign In', new_user_session_path, class: "text-sm px-4 py-2 leading-none rounded text-[#b68256] hover:border-transparent hover:text-white hover:bg-[#b68256] mt-4 lg:mt-0" %>
+          <%= link_to 'Sign Up', new_user_registration_path, class: "text-sm px-4 py-2 leading-none border rounded text-[#b68256] border-[#b68256] hover:border-transparent hover:text-white hover:bg-[#b68256] mt-4 lg:mt-0" %>
+        <% end %>
         </div>
         <%= link_to 'CART', cart_path%>
         <%= turbo_frame_tag "cart_quantity" do %>
@@ -94,4 +105,18 @@
   }
 
   toggleSearch.addEventListener('click', handleSearchClick);
+
+  var userMenuBtn = document.getElementById('user-menu-button');
+  var userMenuDropdown = document.getElementById('user-menu-dropdown');
+
+  function handleUserMenuClick() {
+      if (userMenuDropdown.style.display === 'block') {
+          userMenuDropdown.style.display = 'none';
+      } else {
+          userMenuDropdown.style.display = 'block';
+      }
+  }
+
+  userMenuBtn.addEventListener('click', handleUserMenuClick);
+
 </script>

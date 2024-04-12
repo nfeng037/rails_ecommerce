@@ -17,47 +17,39 @@ class PaymentsController < ApplicationController
         metadata: { order_id: @order.id }
       )
 
-      payment = Payment.create(order: @order, status: :processing)
+      payment = Payment.create(order: @order, status: :processing, amount: @order.total_with_taxes, payment_date: Time.current)
 
       @order.update(payment_intent_id: @payment_intent.id)
-      payment.update(status: :successful)
-
-      if @order.update(status: :paid)
-        Payment.create(order: @order, status: :successful, amount: @order.total_with_taxes, payment_date: Time.current)
-        @order.cart.cart_items.destroy_all
-      else
-        redirect_to payments_new_path(order_id: @order.id), alert: "Unable to update order status."
-      end
-
       redirect_to payments_success_path(order_id: @order.id), notice: "Payment was initiated successfully."
     rescue Stripe::StripeError => e
       payment.update(status: :failed) if payment
-      redirect_to payment_path(@order), alert: e.message
+      redirect_to new_order_path(order_id: @order.id), alert: e.message
     end
   end
 
   def cancel
-    @order.update(status: :cancelled) if @order
+    payment = Payment.find_by(order: @order, status: :processing)
+    if payment.present?
+      payment.update(status: :failed)
+      @order.update(status: :cancelled)
+    end
     redirect_to new_order_path, alert: "Payment was cancelled."
   end
 
   def success
-    @cart = Cart.find(session[:cart_id])
     if @order.update(status: :paid)
-      Payment.create(
-        order: @order,
-        status: :successful,
-        amount: @order.total_with_taxes,
-        payment_date: Time.current)
+      payment = Payment.find_by(order: @order, status: :processing)
+      payment.update(status: :successful) if payment
 
-        @cart.cart_items.destroy_all
-        new_cart = Cart.create
-        session[:cart_id] = new_cart.id
+      Cart.find(session[:cart_id]).cart_items.destroy_all
+      new_cart = Cart.create
+      session[:cart_id] = new_cart.id
+
+      render 'payments/success', notice: "Payment was successful and your cart has been cleared."
     else
       redirect_to payments_new_path(order_id: @order.id), alert: "Unable to update order status."
     end
   end
-
 
   private
 

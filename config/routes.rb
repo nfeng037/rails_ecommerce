@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post 'cart/remove'
   post 'cart/decrease'
   post 'cart/update'
+  
 
   get 'static_pages/index'
   get 'pages/:identifier', to: 'static_pages#show', as: :static_page

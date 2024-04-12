@@ -21,7 +21,6 @@ class OrdersController < ApplicationController
   def create
     Rails.logger.debug "Submitted params: #{params.inspect}"
     @order = Order.new(order_params)
-    @order.cart = @cart
     @order.user = current_user if user_signed_in?
     @order.is_guest = !user_signed_in?
 
@@ -42,10 +41,11 @@ class OrdersController < ApplicationController
       end
 
       @cart.cart_items.each do |item|
+        price = item.product.active ? item.product.price * 0.85 : item.product.price
         @order.order_items.create!(
           product_id: item.product_id,
           quantity: item.quantity,
-          price: item.product.price
+          price: price
         )
       end
 
@@ -55,10 +55,12 @@ class OrdersController < ApplicationController
     end
   end
 
+
   def update_summary
-    @order = Order.new(order_params)
-    @order.cart = @cart
-    set_taxes(Province.find(@order.province_id))
+    province_id = params[:order][:province_id]
+    set_taxes(province_id)
+    total_price = @cart.cart_items.inject(0) { |sum, item| sum + item.quantity * item.product.price }
+    total_with_taxes = total_price + @taxes.values.sum
 
     respond_to do |format|
       format.turbo_stream do
