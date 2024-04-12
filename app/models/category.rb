@@ -7,4 +7,7 @@ class Category < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     ["products"]
   end
+
+  validates :name, presence: true
+  validates :description, length: { maximum: 500 }
 end

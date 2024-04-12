@@ -19,4 +19,7 @@ class User < ApplicationRecord
     ["created_at", "email", "encrypted_password", "id", "id_value", "remember_created_at", "reset_password_sent_at", "reset_password_token", "updated_at"]
   end
 
+  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :encrypted_password, presence: true
 end
+

@@ -15,4 +15,8 @@ class Address < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     ["province", "user"]
   end
+
+  validates :user_id, :province_id, :name, :phone_number, :address_line, :city, :postal_code, presence: true
+  validates :phone_number, format: { with: /\A[\d\s\+\-()]+\z/ }, length: { maximum: 15 }
+  validates :postal_code, format: { with: /\A[\dA-Z]+\z/i }, length: { maximum: 10 }
 end

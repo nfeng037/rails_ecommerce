@@ -16,4 +16,8 @@ class Order < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     ["order_items", "payments", "products", "province", "user"]
   end
+
+  validates :name, :address, :city, :postal_code, :province_id, presence: true
+  validates :phone_number, presence: true, format: { with: /\A[\d\s\+\-()]+\z/ }, length: { maximum: 15 }
+  validates :total_with_taxes, :taxes, numericality: true
 end

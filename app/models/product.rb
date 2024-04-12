@@ -12,4 +12,8 @@ class Product < ApplicationRecord
   has_many :cartItems
   has_many :carts, through: :cartItems
   has_many :order_items
+
+  validates :name, :price, :stock, :category_id, presence: true
+  validates :price, numericality: { greater_than_or_equal_to: 0.0 }
+  validates :stock, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 end
